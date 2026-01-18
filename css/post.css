@@ -507,10 +507,9 @@ pre code::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-/* PDF embedding styles */
+/* PDF embedding styles (for direct iframe/embed usage) */
 .post-content embed[type="application/pdf"],
-.post-content iframe[src*=".pdf"],
-.post-content iframe[src*="docs.google.com/viewer"] {
+.post-content iframe[src*=".pdf"] {
   width: 100%;
   min-height: 600px;
   border: 1px solid var(--color-border-code);
@@ -583,7 +582,6 @@ pre code::-webkit-scrollbar-track {
   /* PDF embedding responsive styles for tablets */
   .post-content embed[type="application/pdf"],
   .post-content iframe[src*=".pdf"],
-  .post-content iframe[src*="docs.google.com/viewer"],
   .post-content object[type="application/pdf"] {
     width: 100%;
     min-height: 500px;
@@ -642,7 +640,6 @@ pre code::-webkit-scrollbar-track {
   /* PDF embedding responsive styles for mobile phones */
   .post-content embed[type="application/pdf"],
   .post-content iframe[src*=".pdf"],
-  .post-content iframe[src*="docs.google.com/viewer"],
   .post-content object[type="application/pdf"] {
     width: 100%;
     min-height: 400px;
@@ -654,8 +651,7 @@ pre code::-webkit-scrollbar-track {
   }
 
   /* Ensure PDF iframe is scrollable on mobile */
-  .post-content iframe[src*=".pdf"],
-  .post-content iframe[src*="docs.google.com/viewer"] {
+  .post-content iframe[src*=".pdf"] {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
