@@ -279,3 +279,133 @@ a {
   border-bottom: 2px solid var(--font-color);
   cursor: not-allowed;
 }
+
+/* Responsive design for mobile and tablet devices */
+@media screen and (max-width: 768px) {
+  /* Header and main container adjustment */
+  .header, .footer, .main {
+    padding: 48px 5vw 20px;
+  }
+
+  .header {
+    padding: 40px 5vw 0;
+  }
+
+  /* Logo adjustment */
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  /* Navigation adjustment */
+  .nav {
+    flex-wrap: wrap;
+  }
+
+  .nav li {
+    margin-right: 16px;
+    margin-bottom: 4px;
+  }
+
+  /* Post list item adjustment */
+  .post-item {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+  }
+
+  .post-item-title {
+    font-size: 1.4rem;
+  }
+
+  /* Archive item adjustment */
+  .archive-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 8px;
+  }
+
+  .archive-item span {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Header and main container adjustment for mobile */
+  .header, .footer, .main {
+    padding: 32px 4vw 16px;
+  }
+
+  .header {
+    padding: 28px 4vw 0;
+  }
+
+  /* Logo adjustment for mobile */
+  .logo {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  /* Header container adjustment */
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Navigation adjustment for mobile */
+  .nav {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .nav li {
+    margin-right: 12px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+
+  /* Post list item adjustment for mobile */
+  .post-item {
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+  }
+
+  .post-item-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .post-item-summary {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .post-item-extra {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .post-item-extra > .date {
+    margin-right: 8px;
+    margin-bottom: 4px;
+  }
+
+  /* Archive item adjustment for mobile */
+  .archive-item {
+    padding: 10px 6px;
+  }
+
+  .archive-item span {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .archive-item > .title {
+    font-size: 0.95rem;
+  }
+
+  /* Footer adjustment */
+  .footer {
+    padding: 20px 0;
+    font-size: 0.8rem;
+  }
+}

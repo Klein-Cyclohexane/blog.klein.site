@@ -524,3 +524,151 @@ pre code::-webkit-scrollbar-track {
   border-radius: 5px;
   margin: 1em 0;
 }
+
+/* Responsive design for mobile and tablet devices */
+@media screen and (max-width: 768px) {
+  /* PDF embedding responsive styles for tablets */
+  .post-content embed[type="application/pdf"],
+  .post-content iframe[src*=".pdf"],
+  .post-content object[type="application/pdf"] {
+    width: 100%;
+    min-height: 500px;
+    height: 600px;
+    border: 1px solid var(--color-border-code);
+    border-radius: 5px;
+    margin: 1em 0;
+  }
+
+  /* Post title adjustment */
+  .post-title {
+    font-size: 1.4rem;
+  }
+
+  /* Post content font size adjustment */
+  .post-content {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Heading sizes adjustment */
+  .post-content h1 {
+    font-size: 1.75em;
+  }
+
+  .post-content h2 {
+    font-size: 1.4em;
+  }
+
+  .post-content h3 {
+    font-size: 1.2em;
+  }
+
+  /* Code block adjustment */
+  .post-content code,
+  .post-content pre {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* PDF embedding responsive styles for mobile phones */
+  .post-content embed[type="application/pdf"],
+  .post-content iframe[src*=".pdf"],
+  .post-content object[type="application/pdf"] {
+    width: 100%;
+    min-height: 400px;
+    height: 500px;
+    border: 1px solid var(--color-border-code);
+    border-radius: 5px;
+    margin: 1em 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure PDF iframe is scrollable on mobile */
+  .post-content iframe[src*=".pdf"] {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Post title adjustment for mobile */
+  .post-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  /* Post meta adjustment */
+  .post-meta {
+    font-size: 0.8rem;
+    margin-bottom: 24px;
+  }
+
+  /* Post content font size adjustment for mobile */
+  .post-content {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  /* Heading sizes adjustment for mobile */
+  .post-content h1 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
+
+  .post-content h2 {
+    font-size: 1.3em;
+    margin-top: 18px;
+    margin-bottom: 10px;
+  }
+
+  .post-content h3 {
+    font-size: 1.15em;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .post-content h4 {
+    font-size: 1em;
+  }
+
+  .post-content h5 {
+    font-size: 0.9em;
+  }
+
+  .post-content h6 {
+    font-size: 0.85em;
+  }
+
+  /* Paragraph spacing */
+  .post-content p {
+    margin-bottom: 12px;
+  }
+
+  /* Code block adjustment for mobile */
+  .post-content code,
+  .post-content pre {
+    font-size: 12px;
+  }
+
+  /* Table adjustment for mobile */
+  .post-content table {
+    font-size: 14px;
+  }
+
+  .post-content table td,
+  .post-content table th {
+    padding: 4px 8px;
+  }
+
+  /* Blockquote adjustment */
+  .post-content blockquote {
+    padding: 0 0.8em;
+    margin: 1em 0;
+  }
+
+  /* List padding adjustment */
+  .post-content ol,
+  .post-content ul {
+    padding-left: 1.5em;
+  }
+}
