@@ -526,6 +526,58 @@ pre code::-webkit-scrollbar-track {
   margin: 1em 0;
 }
 
+/* PDF.js viewer styles */
+.pdf-viewer-container {
+  width: 100%;
+  min-height: 400px;
+  border: 1px solid var(--color-border-code);
+  border-radius: 5px;
+  margin: 1em 0;
+  background: var(--color-background);
+  position: relative;
+  overflow-x: auto;
+}
+
+.pdf-canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.pdf-page-wrapper {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.pdf-page-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.pdf-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  color: var(--font-color-secondary);
+  font-size: 14px;
+}
+
+.pdf-error {
+  padding: 20px;
+  color: #d32f2f;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Responsive design for mobile and tablet devices */
 @media screen and (max-width: 768px) {
   /* PDF embedding responsive styles for tablets */
@@ -539,6 +591,20 @@ pre code::-webkit-scrollbar-track {
     border: 1px solid var(--color-border-code);
     border-radius: 5px;
     margin: 1em 0;
+  }
+
+  /* PDF.js viewer responsive styles for tablets */
+  .pdf-viewer-container {
+    min-height: 400px;
+  }
+
+  .pdf-canvas-container {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .pdf-page-wrapper {
+    margin-bottom: 15px;
   }
 
   /* Post title adjustment */
@@ -592,6 +658,26 @@ pre code::-webkit-scrollbar-track {
   .post-content iframe[src*="docs.google.com/viewer"] {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* PDF.js viewer responsive styles for mobile phones */
+  .pdf-viewer-container {
+    min-height: 300px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pdf-canvas-container {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .pdf-page-wrapper {
+    margin-bottom: 10px;
+  }
+
+  .pdf-loading {
+    min-height: 300px;
+    font-size: 13px;
   }
 
   /* Post title adjustment for mobile */
