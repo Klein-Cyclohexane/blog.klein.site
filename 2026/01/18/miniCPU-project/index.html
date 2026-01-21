@@ -9,10 +9,11 @@
     
     Klein's Blog
   </title>
+  <!-- 图片 -->
+  <link rel="preconnect" href="https://cdn.rthe.cn" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.rthe.cn">
+  <link rel="shortcut icon" href="https://cdn.rthe.cn/cached-42f6b14bc08dd45f53faa5adca3f5c9e-avif/rayklein/avatar.png" type="image/png">
 
-  
-  <link rel="shortcut icon" href="/blog.klein.site/images/signature.png">
-  
 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   
@@ -26,6 +27,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
+  <!-- 文件 -->
+  <link rel="preconnect" href="https://rayklein.rth1.xyz">
+  <link rel="dns-prefetch" href="//rayklein.rth1.xyz">
+  
+  <link rel="preload" 
+        as="document" 
+        href="https://rayklein.rth1.xyz/report.pdf"
+        type="application/pdf"
+        crossorigin="anonymous">
   
 <link rel="stylesheet" href="/blog.klein.site/css/root.css">
 
@@ -72,8 +82,18 @@
 
 
 
-<iframe src="/blog.klein.site/file/report.pdf" width="100%" height="600px" style="border: 1px solid var(--color-border-code); border-radius: 5px;" allowfullscreen></iframe>
-
+<div class="pdf-container">
+  <iframe 
+    src="https://rayklein.rth1.xyz/report.pdf#view=FitH&toolbar=0"
+    title="PDF"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+  <div class="pdf-actions">
+    <a href="https://rayklein.rth1.xyz/report.pdf" download>download</a>
+    <a href="https://rayklein.rth1.xyz/report.pdf" target="_blank">open in new window</a>
+  </div>
+</div>
 
 
 </main>
