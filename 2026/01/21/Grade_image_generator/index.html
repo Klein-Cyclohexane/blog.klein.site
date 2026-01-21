@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    Grade_image_generator 丨
+    
+    Klein's Blog
+  </title>
+  <!-- 图片 -->
+  <link rel="preconnect" href="https://cdn.rthe.cn" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.rthe.cn">
+  <link rel="shortcut icon" href="https://cdn.rthe.cn/cached-42f6b14bc08dd45f53faa5adca3f5c9e-avif/rayklein/avatar.png" type="image/png">
+
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  <!-- 文件 -->
+  <link rel="preconnect" href="https://rayklein.rth1.xyz">
+  <link rel="dns-prefetch" href="//rayklein.rth1.xyz">
+  
+  
+<link rel="stylesheet" href="/blog.klein.site/css/root.css">
+
+  
+<link rel="stylesheet" href="/blog.klein.site/css/style.css">
+
+  
+<link rel="stylesheet" href="/blog.klein.site/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/blog.klein.site/">Klein's Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/blog.klein.site/tags/Blog">Blog</a></li>
+      
+      <li><a href="/blog.klein.site/tags/Note">Note</a></li>
+      
+      <li><a href="/blog.klein.site/archives">archives</a></li>
+      
+      <li><a href="/blog.klein.site/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">Grade_image_generator</div>
+  <div class="post-meta">
+    <div class="date">2026 January 21th</div>
+    <div class="tags">
+      
+      <div class="tag-item">Note</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content">
+<p>Yesterday, with some free time on my hands, I decided to write a small script that could import an spreadsheet file and then output a visualized score chart.</p>
+<p>The color scheme inspiration came from PKU Tree Hole</p>
+
+<figure class="post-image-wrapper">
+  <img 
+    src="https://cdn.rthe.cn/cached-290f8f8f93a339313d33f31bad88fef8-avif/rayklein/xzyygrade.png" 
+    alt="Grade Chart"
+    width="200"
+    height="200"
+    loading="lazy"
+    decoding="async"
+    crossorigin="anonymous"
+    class="post-image"
+  >
+  <figcaption class="image-caption">👆Score Chart for a 2025 Undergraduate PKU Student of the College of Chemistry and Molecular Engineering</figcaption>
+</figure>
+
+<p>I use Python as the programming language, and implement image output through pandas, as well as the Image, ImageDraw, and ImageFont modules from the PIL package.</p>
+
+<div class="code-container">
+    <div class="code-header">
+      <span class="code-language">Python</span>
+      <button class="copy-btn" onclick="copyCode(this)">copy code</button>
+    </div>
+    <pre><code class="language-python">
+import pandas as pd
+from PIL import Image, ImageDraw, ImageFont
+import os
+import sys
+from typing import Dict, Tuple, List
+import math
+    </code></pre>
+  </div>
+
+<p>Then I set up two color saturation filling styles to reflect the differences between different grades relative to the full score.</p>
+
+<div class="code-container">
+    <div class="code-header">
+      <span class="code-language">Python</span>
+      <button class="copy-btn" onclick="copyCode(this)">copy code</button>
+    </div>
+    <pre><code class="language-python">
+class GradeImageGenerator:
+    """Grade_image_generator class"""
+    
+    # (RGB)
+    # high saturation solid colors
+    GRADE_COLORS_SOLID = {
+        'A+': (109,255,77),     
+        'A': (169,255,72),      
+        'A-': (169,255,72),     
+        'B+': (223,255,100),    
+        'B': (223,255,100),     
+        'B-': (223,255,100),     
+        'C+': (255,234,109),     
+        'C': (255,234,109),      
+        'C-': (255,234,109),     
+        'F': (79, 148, 205),      
+        'P': (217,217,243),     
+        'NP': (79, 148, 205),     
+    }
+
+    # non-solid part (low saturation background)
+    GRADE_COLORS_BACKGROUND = {
+        'A+': (118, 222, 96),     # #76de60
+        'A': (158,220,95),      # #76de60
+        'A-': (158,220,95),     # #76de60
+        'B+': (193,221,94),     # #9edd60
+        'B': (193,221,94),      # #9edd60
+        'B-': (193,221,94),     # #9edd60
+        'C+': (222,203,97),     # #deca60
+        'C': (222,203,97),      # #deca60
+        'C-': (222,203,97),     # #deca60
+        'F': (79, 148, 205),      # #4F94CD
+        'P': (217,217,243),     # #d9d9f5
+        'NP': (79, 148, 205),     # #4F94CD
+    }
+    
+    HEADER_COLOR = (206,255,65)  # #ceff41
+    
+    # fill ratio for each grade (0.0 - 1.0)
+    GRADE_FILL_RATIO = {
+        'A+': 1.0,    # 100%
+        'A': 0.9,     # 90%
+        'A-': 0.8,    # 80%
+        'B+': 0.7,    # 70%
+        'B': 0.6,     # 60%
+        'B-': 0.5,    # 50%
+        'C+': 0.4,    # 40%
+        'C': 0.3,     # 30%
+        'C-': 0.2,    # 20%
+        'F': 0.0,     # 0%
+        'P': 0.0,     # 0%
+        'NP': 0.0,    # 0%
+    }
+    </code></pre>
+  </div>
+
+<p>Then calculated the total credits, total number of courses, and the overall GPA, followed by a percentage conversion.</p>
+
+<div class="code-container">
+    <div class="code-header">
+      <span class="code-language">Python</span>
+      <button class="copy-btn" onclick="copyCode(this)">copy code</button>
+    </div>
+    <pre><code class="language-python">
+def calculate_statistics(self) -> Dict:
+        """
+        calculate total credits, total GPA, and number of counted courses.
+        
+        Returns:
+            include: total_credits, total_gpa, counted_courses, total_courses
+        """
+        # Filter out courses graded as P or NP (which are generally excluded from GPA calculations), 
+        # while courses graded as F shall be included.
+        gpa_courses = self.df[~self.df['等级'].isin(['P', 'NP', 'p', 'np'])]
+        
+        # calculate total credits 
+        total_credits = self.df['学分'].sum()
+        
+        # calculate weighted average GPA (F grades are included in total credits)
+        if len(gpa_courses) > 0:
+            weighted_gpa = (gpa_courses['绩点'] * gpa_courses['学分']).sum() / gpa_courses['学分'].sum()
+            total_gpa = round(weighted_gpa, 2)
+        else:
+            total_gpa = 0.0
+        
+        # calculate number of counted courses (excluding P and NP, but including F)
+        counted_courses = len(gpa_courses)
+
+        
+        return {
+            'total_credits': total_credits,
+            'total_gpa': total_gpa,
+            'counted_courses': counted_courses,
+            'total_courses': len(self.df)
+        }
+    </code></pre>
+  </div>
+<p>Finally, generate the header and score bars for each subject, and combine them together to output the final chart.</p>
+
+<div class="code-container">
+    <div class="code-header">
+      <span class="code-language">Python</span>
+      <button class="copy-btn" onclick="copyCode(this)">copy code</button>
+    </div>
+    <pre><code class="language-python">
+def _draw_header(self, draw: ImageDraw.Draw, stats: Dict, width: int, height: int):
+        """
+        Draw the header
+        
+        Args:
+            draw: ImageDraw object
+            stats: statictics dic
+            width: header width
+            height: header height
+        """
+        # background color #ceff41
+        draw.rectangle([0, 0, width, height], fill=self.HEADER_COLOR)
+        
+        # font
+        font_large = self.get_font(32, bold=True)
+        font_medium = self.get_font(24, bold=True)
+        font_small = self.get_font(18)
+        
+        # semester name
+        semester_text = f"{self.semester_name}"
+        draw.text((20, 20), semester_text, fill=(0, 0, 0), font=font_medium)
+        
+        # total credits and number of courses (left side)
+        # total credits: sum of all course credits
+        total_credits = stats['total_credits']
+        credits_text = f"学分 {total_credits} 共{stats['total_courses']}门课程"
+        draw.text((20, 60), credits_text, fill=(0, 0, 0), font=font_small)
+        
+        # total GPA (right side)
+        gpa_text = f"{stats['total_gpa']}"
+        bbox = draw.textbbox((0, 0), gpa_text, font=font_large)
+        text_width = bbox[2] - bbox[0]
+        draw.text((width - text_width - 20, 20), gpa_text, fill=(0, 0, 0), font=font_large)
+        
+        # percentage score
+        percentage_score = stats['total_gpa'] / 4.0 * 100
+        percentage_text = f"{percentage_score:.1f}"
+        bbox = draw.textbbox((0, 0), percentage_text, font=font_small)
+        text_width = bbox[2] - bbox[0]
+        draw.text((width - text_width - 20, 70), percentage_text, fill=(0, 0, 0), font=font_small)
+    
+    def _draw_course_card(self, draw: ImageDraw.Draw, row: pd.Series, 
+                         x: int, y: int, width: int, height: int):
+        """
+        draw a single course card
+        
+        Args:
+            draw: ImageDraw object
+            row: course data row
+            x: x start coordinate
+            y: y start coordinate
+            width: width
+            height: height
+        """
+        # get grade and corresponding colors
+        grade = str(row['等级']).strip().upper()
+        solid_color = self.get_grade_color_solid(grade)  
+        bg_color = self.get_grade_color_background(grade)  
+        gpa = row['绩点'] if pd.notna(row['绩点']) else 0.0
+        
+        # get fill ratio
+        fill_ratio = self.GRADE_FILL_RATIO.get(grade, 0.0)
+        
+        if fill_ratio >= 1.0:
+            # A+(100%): full solid color 
+            draw.rectangle([x, y, x + width, y + height], fill=solid_color)
+        else:
+            # ohther grades: low saturation background + high saturation solid bar
+            # draw background
+            draw.rectangle([x, y, x + width, y + height], fill=bg_color)
+            
+            fill_width = int(width * fill_ratio)
+            
+            # draw solid bar (from left to right)
+            if fill_width > 0:
+                draw.rectangle([x, y, x + fill_width, y + height], fill=solid_color)
+        
+        # font
+        font_large = self.get_font(28, bold=True)
+        font_medium = self.get_font(18)
+        font_small = self.get_font(14)
+        
+        text_color = (0, 0, 0)  
+        
+        # left side: credits 
+        credits_label = "学分"
+        draw.text((x + 20, y + 15), credits_label, fill=text_color, font=font_small)
+        credits = str(row['学分'])
+        draw.text((x + 20, y + 40), credits, fill=text_color, font=font_large)
+        
+        # middle: course name and details
+        course_name = str(row['科目']) if pd.notna(row['科目']) else "未知课程"
+        course_code = str(row['代号']) if pd.notna(row['代号']) else ""
+        course_type = str(row['类型']) if pd.notna(row['类型']) else ""
+        teacher = str(row['授课教师']) if pd.notna(row['授课教师']) else ""
+        department = str(row['开课院系']) if pd.notna(row['开课院系']) else ""
+        
+        # course name
+        draw.text((x + 100, y + 15), course_name, fill=text_color, font=font_medium)
+        
+        # details
+        detail_text = f"{course_type} {teacher} ({department})"
+        if len(detail_text) > 50:
+            detail_text = detail_text[:47] + "..."
+        draw.text((x + 100, y + 50), detail_text, fill=text_color, font=font_small)
+        
+        # course information 
+        if course_code and str(course_code).lower() != 'nan':
+            code_text = str(course_code)
+            if len(code_text) > 30:
+                code_text = code_text[:27] + "..."
+            draw.text((x + 100, y + 75), code_text, fill=text_color, font=font_small)
+        
+        # right side: grade and GPA / pass status
+        grade_text = str(row['等级']) if pd.notna(row['等级']) else ""
+        
+        # if pass/fail grade, show pass status instead of GPA
+        if grade in ['P', 'NP']:
+            status_text = "通过" if grade == 'P' else "不通过"
+            bbox = draw.textbbox((0, 0), grade_text, font=font_large)
+            text_width = bbox[2] - bbox[0]
+            draw.text((x + width - text_width - 20, y + 20), grade_text, 
+                     fill=text_color, font=font_large)
+            bbox = draw.textbbox((0, 0), status_text, font=font_small)
+            text_width = bbox[2] - bbox[0]
+            draw.text((x + width - text_width - 20, y + 60), status_text, 
+                     fill=text_color, font=font_small)
+        else:
+            # show grade
+            bbox = draw.textbbox((0, 0), grade_text, font=font_large)
+            text_width = bbox[2] - bbox[0]
+            draw.text((x + width - text_width - 20, y + 20), grade_text, 
+                     fill=text_color, font=font_large)
+            # show GPA
+            gpa_text = f"{gpa:.2f}"
+            bbox = draw.textbbox((0, 0), gpa_text, font=font_small)
+            text_width = bbox[2] - bbox[0]
+            draw.text((x + width - text_width - 20, y + 60), gpa_text, 
+                     fill=text_color, font=font_small)
+    </code></pre>
+  </div>
+
+<p>The method of use is also very simple.</p>
+<div class="code-container">
+    <div class="code-header">
+      <span class="code-language">Bash</span>
+      <button class="copy-btn" onclick="copyCode(this)">copy code</button>
+    </div>
+    <pre><code class="language-bash">
+python grade_image_generator.py grades.xlsx 2025Fall grade.png
+    </code></pre>
+  </div>
+
+<p>I have put the code and the documents in a Github repository. Check this: </p>
+<a href="https://github.com/Klein-Cyclohexane/Grade_image_Generator" target="_blank">Grade_image_Generator</a>
+
+<p>However, this is just a small project built on a backend tech stack.</p>
+<p>Maybe I'll find some time to rebuild it with frontend technologies sometime :) </p>
+
+</main>
+
+
+</article>
+
+
+<script src="/blog.klein.site/js/highlight.js"></script>
+
+  </main>
+
+  <footer class="footer">
+  
+  <span>Copyright © 2026 Klein</span>
+  
+</footer>
+  
+<script src="/blog.klein.site/js/theme.js"></script>
+
+</body>
+
+</html>
+
