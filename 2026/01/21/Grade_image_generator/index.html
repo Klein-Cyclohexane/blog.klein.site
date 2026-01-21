@@ -391,6 +391,39 @@ python grade_image_generator.py grades.xlsx 2025Fall grade.png
 
 <script src="/blog.klein.site/js/highlight.js"></script>
 
+<script>
+function copyCode(button) {
+  const codeContainer = button.closest('.code-container');
+  const codeElement = codeContainer.querySelector('code');
+  const codeText = codeElement.textContent || codeElement.innerText;
+  
+  navigator.clipboard.writeText(codeText).then(() => {
+    button.classList.add('copied');
+    const originalText = button.textContent;
+    button.textContent = 'Copied!';
+    
+    setTimeout(() => {
+      button.classList.remove('copied');
+      button.textContent = originalText;
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy code:', err);
+    const originalText = button.textContent;
+    button.textContent = 'Failed';
+    button.style.background = '#f44336';
+    button.style.borderColor = '#f44336';
+    button.style.color = '#fff';
+    
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.background = '';
+      button.style.borderColor = '';
+      button.style.color = '';
+    }, 2000);
+  });
+}
+</script>
+
   </main>
 
   <footer class="footer">
