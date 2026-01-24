@@ -1,26 +1,29 @@
 .post {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 24px;
+  align-items: stretch;
+  margin-bottom: var(--spacing-lg);
 }
 
 .post-title {
   flex: 0 0 100%;
-  margin-bottom: 12px;
-  font-size: 1.6rem;
+  margin-bottom: var(--spacing-sm);
+  font-size: clamp(1.4rem, 2.8vw, 1.6rem);
   font-weight: 600;
   line-height: 1.5;
   color: var(--font-color);
+  word-break: break-word;
 }
 
 .post-meta {
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 0.9vw, 0.875rem);
   color: var(--font-color-extra);
   flex: 0 0 100%;
-  margin-bottom: 32px;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
 .post-content {
@@ -29,13 +32,14 @@
 
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  line-height: 1.5;
+  line-height: 1.6;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: clamp(14px, 1.25vw, 16px);
+  line-height: 1.6;
   word-wrap: break-word;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  overflow-x: auto;
 }
 
 .post-content h1::before,
@@ -73,21 +77,37 @@
 }
 
 .post-content h1 {
-  font-size: 2em;
+  font-size: clamp(1.75em, 4vw, 2em);
   margin: 0.67em 0;
+  word-break: break-word;
+}
+
+.post-content h2 {
+  font-size: clamp(1.4em, 3.2vw, 1.5em);
+}
+
+.post-content h3 {
+  font-size: clamp(1.15em, 2.8vw, 1.25em);
+}
+
+.post-content h4 {
+  font-size: clamp(1em, 2.2vw, 1em);
+}
+
+.post-content h5 {
+  font-size: clamp(0.9em, 1.8vw, 0.875em);
+}
+
+.post-content h6 {
+  font-size: clamp(0.85em, 1.5vw, 0.85em);
 }
 
 .post-content img {
   border-style: none;
   border-radius: 5px;
   max-width: 100%;
-}
-
-.post-content code,
-.post-content kbd,
-.post-content pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
+  height: auto;
+  display: block;
 }
 
 .post-content hr {
@@ -396,18 +416,24 @@
 
 .post-content table {
   display: block;
-  overflow: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .post-content table th {
   font-weight: 600;
+  background-color: var(--color-background-code);
 }
 
 .post-content table td,
 .post-content table th {
   border: 1px solid #6b6b6b;
-  padding: 6px 13px;
+  padding: clamp(4px, 0.5vw, 6px) clamp(8px, 1vw, 13px);
+  font-size: clamp(12px, 0.95vw, 14px);
 }
 
 .post-content table tr {
@@ -431,11 +457,12 @@
 
 .post-image-wrapper {
   width: 100%;
-  margin: 1.5em 0;
+  margin: 1.5em auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.75em;
 }
 
 .post-image {
@@ -445,16 +472,31 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   object-fit: contain;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.post-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .image-caption {
   margin-top: 0.75em;
   text-align: center;
-  font-size: 0.9em;
+  font-size: clamp(0.8em, 0.9vw, 0.9em);
   color: var(--font-color-extra);
   font-style: italic;
   line-height: 1.5;
   max-width: 100%;
+  padding: 0 10px;
+  word-break: break-word;
+}
+
+.post-content code,
+.post-content kbd,
+.post-content pre {
+  font-family: monospace, monospace;
+  font-size: clamp(12px, 1vw, 14px);
 }
 
 .post-content code {
@@ -464,10 +506,13 @@
   margin: 0;
   padding: 0.2em 0.4em;
   vertical-align: text-top;
+  word-break: break-word;
 }
 
 .post-content pre {
   word-wrap: normal;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 键盘按键 */
@@ -501,13 +546,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
   background: var(--color-background-code);
   border-bottom: 1px solid var(--color-border-code);
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
 }
 
 .code-language {
-  font-size: 0.85em;
+  font-size: clamp(0.75em, 0.9vw, 0.85em);
   font-weight: 600;
   color: var(--font-color-secondary);
   text-transform: uppercase;
@@ -519,8 +566,8 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--color-border-code);
   border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 0.8em;
+  padding: clamp(4px, 0.7vw, 6px) clamp(10px, 1.5vw, 14px);
+  font-size: clamp(0.7em, 0.85vw, 0.8em);
   font-weight: 500;
   color: var(--font-color-secondary);
   cursor: pointer;
@@ -587,16 +634,18 @@
 
 .code-container pre {
   margin: 0;
-  padding: 16px;
+  padding: clamp(10px, 1.5vw, 16px);
   background: transparent;
   border: none;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .code-container code {
   background: transparent;
   padding: 0;
   border-radius: 0;
+  font-size: clamp(11px, 0.95vw, 13px);
 }
 
 .hljs {
@@ -655,15 +704,16 @@ pre code::-webkit-scrollbar-track {
 .post-content embed[type="application/pdf"],
 .post-content iframe[src*=".pdf"] {
   width: 100%;
-  min-height: 600px;
+  min-height: clamp(300px, 80vh, 600px);
   border: 1px solid var(--color-border-code);
   border-radius: 5px;
   margin: 1em 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .post-content object[type="application/pdf"] {
   width: 100%;
-  min-height: 600px;
+  min-height: clamp(300px, 80vh, 600px);
   border: 1px solid var(--color-border-code);
   border-radius: 5px;
   margin: 1em 0;
@@ -672,26 +722,27 @@ pre code::-webkit-scrollbar-track {
 /* PDF.js viewer styles */
 .pdf-viewer-container {
   width: 100%;
-  min-height: 400px;
+  min-height: clamp(300px, 80vh, 400px);
   border: 1px solid var(--color-border-code);
   border-radius: 5px;
   margin: 1em 0;
   background: var(--color-background);
   position: relative;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pdf-canvas-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  gap: 20px;
+  padding: clamp(10px, 2vw, 20px);
+  gap: clamp(10px, 1.5vw, 20px);
 }
 
 .pdf-page-wrapper {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: clamp(10px, 1.5vw, 20px);
   background: #fff;
   border-radius: 4px;
 }
@@ -706,13 +757,13 @@ pre code::-webkit-scrollbar-track {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
+  min-height: clamp(200px, 50vh, 400px);
   color: var(--font-color-secondary);
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 14px);
 }
 
 .pdf-error {
-  padding: 20px;
+  padding: clamp(10px, 2vw, 20px);
   color: #d32f2f;
   text-align: center;
   min-height: 200px;
@@ -721,72 +772,30 @@ pre code::-webkit-scrollbar-track {
   justify-content: center;
 }
 
-/* Responsive design for mobile and tablet devices */
-@media screen and (max-width: 768px) {
-  /* PDF embedding responsive styles for tablets */
-  .post-content embed[type="application/pdf"],
-  .post-content iframe[src*=".pdf"],
-  .post-content object[type="application/pdf"] {
-    width: 100%;
-    min-height: 500px;
-    height: 600px;
-    border: 1px solid var(--color-border-code);
-    border-radius: 5px;
-    margin: 1em 0;
-  }
-
-  /* PDF.js viewer responsive styles for tablets */
-  .pdf-viewer-container {
-    min-height: 400px;
-  }
-
-  .pdf-canvas-container {
-    padding: 15px;
-    gap: 15px;
-  }
-
-  .pdf-page-wrapper {
-    margin-bottom: 15px;
-  }
-
-  /* Post title adjustment */
+/* Responsive design for tablets and medium screens */
+@media screen and (max-width: 1024px) {
   .post-title {
-    font-size: 1.4rem;
+    font-size: clamp(1.3rem, 2.6vw, 1.5rem);
   }
 
-  /* Post content font size adjustment */
   .post-content {
-    font-size: 15px;
-    letter-spacing: 0.5px;
+    font-size: clamp(14px, 1.2vw, 15px);
   }
 
-  /* Heading sizes adjustment */
   .post-content h1 {
-    font-size: 1.75em;
+    font-size: clamp(1.6em, 3.5vw, 1.9em);
   }
 
   .post-content h2 {
-    font-size: 1.4em;
+    font-size: clamp(1.3em, 3vw, 1.45em);
   }
 
-  .post-content h3 {
-    font-size: 1.2em;
-  }
-
-  /* Code block adjustment */
-  .post-content code,
-  .post-content pre {
-    font-size: 13px;
-  }
-
-  /* Code container adjustment for tablet */
   .code-container {
     margin: 1.2em 0;
-    border-radius: 6px;
   }
 
   .code-header {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 
   .code-language {
@@ -802,7 +811,6 @@ pre code::-webkit-scrollbar-track {
     padding: 12px;
   }
 
-  /* Image wrapper adjustment for tablet */
   .post-image-wrapper {
     margin: 1.2em 0;
   }
@@ -812,8 +820,123 @@ pre code::-webkit-scrollbar-track {
   }
 
   .image-caption {
-    font-size: 0.85em;
+    font-size: clamp(0.8em, 0.85vw, 0.85em);
     margin-top: 0.6em;
+  }
+
+  .post-content table td,
+  .post-content table th {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+}
+
+/* Responsive design for tablets */
+@media screen and (max-width: 768px) {
+  /* PDF embedding responsive styles for tablets */
+  .post-content embed[type="application/pdf"],
+  .post-content iframe[src*=".pdf"],
+  .post-content object[type="application/pdf"] {
+    min-height: clamp(300px, 70vh, 500px);
+    height: auto;
+  }
+
+  /* PDF.js viewer responsive styles for tablets */
+  .pdf-viewer-container {
+    min-height: clamp(300px, 70vh, 400px);
+  }
+
+  .pdf-canvas-container {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .pdf-page-wrapper {
+    margin-bottom: 12px;
+  }
+
+  /* Post title adjustment */
+  .post-title {
+    font-size: clamp(1.2rem, 2.3vw, 1.4rem);
+  }
+
+  /* Post content font size adjustment */
+  .post-content {
+    font-size: clamp(13px, 1.15vw, 14px);
+    letter-spacing: 0.4px;
+  }
+
+  /* Heading sizes adjustment */
+  .post-content h1 {
+    font-size: clamp(1.5em, 3.2vw, 1.75em);
+    margin-top: 18px;
+    margin-bottom: 12px;
+  }
+
+  .post-content h2 {
+    font-size: clamp(1.2em, 2.8vw, 1.4em);
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
+
+  .post-content h3 {
+    font-size: clamp(1.05em, 2.3vw, 1.2em);
+  }
+
+  /* Code block adjustment */
+  .post-content code,
+  .post-content pre {
+    font-size: 12px;
+  }
+
+  /* Code container adjustment for tablet */
+  .code-container {
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+
+  .code-header {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .code-language {
+    font-size: 0.75em;
+  }
+
+  .copy-btn {
+    padding: 4px 10px;
+    font-size: 0.7em;
+  }
+
+  .code-container pre {
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  /* Image wrapper adjustment for tablet */
+  .post-image-wrapper {
+    margin: 1.2em 0;
+    gap: 0.6em;
+  }
+
+  .post-image {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .image-caption {
+    font-size: clamp(0.75em, 0.8vw, 0.85em);
+    margin-top: 0.5em;
+  }
+
+  .post-content table {
+    font-size: 13px;
+  }
+
+  .post-content table td,
+  .post-content table th {
+    padding: 4px 6px;
+    font-size: 12px;
   }
 }
 
@@ -823,8 +946,8 @@ pre code::-webkit-scrollbar-track {
   .post-content iframe[src*=".pdf"],
   .post-content object[type="application/pdf"] {
     width: 100%;
-    min-height: 400px;
-    height: 500px;
+    min-height: clamp(250px, 60vh, 400px);
+    height: auto;
     border: 1px solid var(--color-border-code);
     border-radius: 5px;
     margin: 1em 0;
@@ -839,139 +962,150 @@ pre code::-webkit-scrollbar-track {
 
   /* PDF.js viewer responsive styles for mobile phones */
   .pdf-viewer-container {
-    min-height: 300px;
+    min-height: clamp(250px, 60vh, 300px);
     -webkit-overflow-scrolling: touch;
   }
 
   .pdf-canvas-container {
-    padding: 10px;
-    gap: 10px;
+    padding: 8px;
+    gap: 8px;
   }
 
   .pdf-page-wrapper {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .pdf-loading {
-    min-height: 300px;
-    font-size: 13px;
+    min-height: clamp(200px, 50vh, 300px);
+    font-size: 12px;
   }
 
   /* Post title adjustment for mobile */
   .post-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    margin-bottom: 8px;
   }
 
   /* Post meta adjustment */
   .post-meta {
-    font-size: 0.8rem;
-    margin-bottom: 24px;
+    font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+    margin-bottom: 18px;
+    gap: var(--spacing-xs);
   }
 
   /* Post content font size adjustment for mobile */
   .post-content {
-    font-size: 14px;
+    font-size: clamp(13px, 1.1vw, 14px);
     letter-spacing: 0.3px;
   }
 
   /* Heading sizes adjustment for mobile */
   .post-content h1 {
-    font-size: 1.5em;
-    margin-top: 20px;
-    margin-bottom: 12px;
-  }
-
-  .post-content h2 {
-    font-size: 1.3em;
-    margin-top: 18px;
+    font-size: clamp(1.3em, 2.8vw, 1.5em);
+    margin-top: 16px;
     margin-bottom: 10px;
   }
 
-  .post-content h3 {
-    font-size: 1.15em;
-    margin-top: 16px;
+  .post-content h2 {
+    font-size: clamp(1.15em, 2.4vw, 1.3em);
+    margin-top: 14px;
     margin-bottom: 8px;
   }
 
-  .post-content h4 {
-    font-size: 1em;
+  .post-content h3 {
+    font-size: clamp(1em, 2vw, 1.15em);
+    margin-top: 12px;
+    margin-bottom: 6px;
   }
 
-  .post-content h5 {
+  .post-content h4 {
     font-size: 0.9em;
   }
 
-  .post-content h6 {
+  .post-content h5 {
     font-size: 0.85em;
+  }
+
+  .post-content h6 {
+    font-size: 0.8em;
   }
 
   /* Paragraph spacing */
   .post-content p {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   /* Code block adjustment for mobile */
   .post-content code,
   .post-content pre {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   /* Code container adjustment for mobile */
   .code-container {
-    margin: 1em 0;
+    margin: 0.8em 0;
     border-radius: 6px;
   }
 
   .code-header {
-    padding: 8px 10px;
+    padding: 6px 8px;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
   .code-language {
-    font-size: 0.75em;
+    font-size: 0.7em;
+    order: 1;
   }
 
   .copy-btn {
-    padding: 4px 10px;
-    font-size: 0.7em;
-    gap: 4px;
+    padding: 3px 8px;
+    font-size: 0.65em;
+    gap: 3px;
+    order: 2;
   }
 
   .copy-btn::before {
-    font-size: 0.85em;
+    font-size: 0.8em;
   }
 
   .code-container pre {
-    padding: 10px;
+    padding: 8px;
+    font-size: 10px;
   }
 
   /* Table adjustment for mobile */
   .post-content table {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .post-content table td,
   .post-content table th {
-    padding: 4px 8px;
+    padding: 3px 5px;
+    font-size: 11px;
   }
 
   /* Blockquote adjustment */
   .post-content blockquote {
-    padding: 0 0.8em;
-    margin: 1em 0;
+    padding: 0 0.6em;
+    margin: 0.8em 0;
+    border-left: 0.2em solid var(--font-color-refer);
   }
 
   /* List padding adjustment */
   .post-content ol,
   .post-content ul {
-    padding-left: 1.5em;
+    padding-left: 1.2em;
+  }
+
+  .post-content li {
+    margin-bottom: 4px;
   }
 
   /* Image wrapper adjustment for mobile */
   .post-image-wrapper {
-    margin: 1em 0;
+    margin: 0.8em 0;
+    gap: 0.5em;
   }
 
   .post-image {
@@ -980,8 +1114,8 @@ pre code::-webkit-scrollbar-track {
   }
 
   .image-caption {
-    font-size: 0.8em;
-    margin-top: 0.5em;
-    padding: 0 10px;
+    font-size: clamp(0.7em, 0.75vw, 0.8em);
+    margin-top: 0.4em;
+    padding: 0 8px;
   }
 }

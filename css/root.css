@@ -27,6 +27,18 @@
   --color-hashtag: #51525d;
 
   --main-width: 1080px;
+
+  /* Responsive font size */
+  --font-size-base: clamp(14px, 1.25vw, 16px);
+  --font-size-small: clamp(12px, 1vw, 14px);
+  --font-size-large: clamp(18px, 1.5vw, 20px);
+
+  /* Responsive spacing */
+  --spacing-xs: clamp(4px, 0.5vw, 8px);
+  --spacing-sm: clamp(8px, 1vw, 12px);
+  --spacing-md: clamp(16px, 1.5vw, 24px);
+  --spacing-lg: clamp(24px, 2vw, 32px);
+  --spacing-xl: clamp(32px, 2.5vw, 48px);
 }
 
 @media (prefers-color-scheme: light) {
