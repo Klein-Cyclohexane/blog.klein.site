@@ -227,9 +227,9 @@
   flex-shrink: 0;
 }
 
-.modal-title {
+.modal-tag {
   font-size: var(--font-size-large);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--font-color);
   margin: 0 0 8px 0;
 }
