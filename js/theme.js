@@ -64,3 +64,43 @@ observeMediaChange(mqList, (event) => {
     switchThemeMode("light");
   }
 });
+
+// Back to Top Button Functionality
+(function() {
+  // Check if we're on the about page
+  const isAboutPage = window.location.pathname.includes('/about');
+  if (isAboutPage) {
+    return; // Don't add button on about page
+  }
+
+  // Create the button
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.className = 'back-to-top';
+  backToTopBtn.innerHTML = 'Back<br>to Top';
+  backToTopBtn.setAttribute('aria-label', 'Back to top');
+  document.body.appendChild(backToTopBtn);
+
+  // Show/hide button based on scroll position
+  function toggleButton() {
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  }
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Event listeners
+  window.addEventListener('scroll', toggleButton);
+  backToTopBtn.addEventListener('click', scrollToTop);
+
+  // Initial check
+  toggleButton();
+})();
