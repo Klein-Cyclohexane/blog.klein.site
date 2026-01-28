@@ -104,3 +104,35 @@ observeMediaChange(mqList, (event) => {
   // Initial check
   toggleButton();
 })();
+
+// Breadcrumb navigation (iGEM wiki-style)
+(function() {
+  const main = document.querySelector('main.main');
+  const post = document.querySelector('article.post');
+  if (!main || !post) return;
+
+  const postTitleEl = post.querySelector('.post-title');
+  const tagEl = post.querySelector('.post-meta .tags .tag-item');
+  const base = (document.querySelector('a.logo') && document.querySelector('a.logo').href) ?
+    new URL(document.querySelector('a.logo').href).pathname.replace(/\/$/, '') || '' : '';
+
+  const homeLabel = 'Home';
+  const homeHref = base ? base + '/' : '/';
+  const currentTitle = postTitleEl ? postTitleEl.textContent.trim() : '';
+  if (!currentTitle) return;
+
+  const nav = document.createElement('nav');
+  nav.className = 'breadcrumb';
+  nav.setAttribute('aria-label', 'Breadcrumb');
+
+  let html = '<a href="' + homeHref + '">' + homeLabel + '</a>';
+  if (tagEl) {
+    const tagName = tagEl.textContent.trim();
+    const tagSlug = tagName.replace(/\s+/g, '_');
+    html += '<span class="separator">›</span><a href="' + base + '/tags/' + encodeURIComponent(tagName) + '">' + tagName + '</a>';
+  }
+  html += '<span class="separator">›</span><span class="current">' + currentTitle + '</span>';
+  nav.innerHTML = html;
+
+  main.insertBefore(nav, main.firstElementChild);
+})();
