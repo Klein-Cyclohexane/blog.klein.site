@@ -78,6 +78,17 @@
     align-items: center;
     gap: 10px;
     transition: all 0.25s ease;
+    position: fixed;
+  }
+
+  .post-toc::before {
+    content: "";
+    position: absolute;
+    top: -24px;
+    bottom: -24px;
+    left: -220px;
+    right: -16px;
+    pointer-events: none;
   }
 
   .post-toc-title {
@@ -146,7 +157,7 @@
   .post-toc:focus-within .post-toc-title {
     text-align: left;
     margin-bottom: 6px;
-    color: var(--font-color-secondary);
+    color: var(--font-color);
     background: none;
   }
 

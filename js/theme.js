@@ -152,7 +152,7 @@ observeMediaChange(mqList, (event) => {
 
   const title = document.createElement('div');
   title.className = 'post-toc-title';
-  title.textContent = 'Contents';
+  title.textContent = 'TOC';
   toc.appendChild(title);
 
   const list = document.createElement('ul');
