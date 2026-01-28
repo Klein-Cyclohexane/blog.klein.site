@@ -65,9 +65,9 @@
 @media screen and (min-width: 1025px) {
   .post-toc {
     position: fixed;
-    top: 50%;
+    top: 30%;
     right: max(16px, 3vw);
-    transform: translateY(-50%);
+    transform: translateY(-30%);
     z-index: 1050;
     width: 60px;
     padding: 14px 10px;
