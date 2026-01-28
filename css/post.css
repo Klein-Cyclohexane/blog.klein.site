@@ -12,15 +12,17 @@
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   border-radius: 8px;
-  border: 1px solid var(--color-hr);
-  background: var(--color-background-code);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
   font-size: var(--font-size-small);
+  color: #000000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .post-toc-title {
   font-weight: 600;
   margin-bottom: var(--spacing-sm);
-  color: var(--font-color-secondary);
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -35,7 +37,7 @@
 }
 
 .post-toc-item a {
-  color: var(--font-color-secondary);
+  color: #000000;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -55,7 +57,7 @@
 }
 
 .post-toc-item.is-active > a {
-  color: var(--font-color);
+  color: #000000;
   font-weight: 600;
 }
 
@@ -71,8 +73,8 @@
     padding: 14px 10px;
     border-radius: 999px;
     border: none;
-    background: radial-gradient(circle at top, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,6 +99,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    /* 收起时 TOC 为蓝色渐变 */
     background: linear-gradient(135deg, #0040E6, #0a7bdc);
     -webkit-background-clip: text;
     background-clip: text;
@@ -138,8 +141,8 @@
   }
 
   .post-toc-item.is-active > a {
-    background: linear-gradient(135deg, #0040E6, #0a7bdc);
-    color: transparent;
+    background: #000000;
+    color: #ffffff;
   }
 
   /* Expanded state on hover/focus */
@@ -157,8 +160,9 @@
   .post-toc:focus-within .post-toc-title {
     text-align: left;
     margin-bottom: 6px;
-    color: var(--font-color);
+    /* 展开后改为纯黑文字 */
     background: none;
+    color: #000000;
   }
 
   .post-toc:hover .post-toc-list,
@@ -176,7 +180,7 @@
     height: auto;
     background: transparent;
     text-indent: 0;
-    color: var(--font-color);
+    color: #000000;
   }
 
   .post-toc:hover .post-toc-item.level-2 a,
