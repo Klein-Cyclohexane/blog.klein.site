@@ -7,6 +7,58 @@
   margin-bottom: var(--spacing-lg);
 }
 
+/* Table of Contents (TOC) */
+.post-toc {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  border: 1px solid var(--color-hr);
+  background: var(--color-background-code);
+  font-size: var(--font-size-small);
+}
+
+.post-toc-title {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--font-color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.post-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-toc-item a {
+  color: var(--font-color-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-toc-item a:hover {
+  color: var(--font-color);
+  text-decoration: underline;
+}
+
+.post-toc-item.level-2 {
+  padding-left: 0;
+}
+
+.post-toc-item.level-3 {
+  padding-left: 1em;
+  font-size: 0.95em;
+}
+
+.post-toc-item.is-active > a {
+  color: var(--font-color);
+  font-weight: 600;
+}
+
 .post-title {
   flex: 0 0 100%;
   margin-bottom: var(--spacing-sm);
