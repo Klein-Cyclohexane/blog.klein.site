@@ -39,7 +39,12 @@ const galleryData = [
     src: 'https://cdn.rthe.cn/cached-01cfd3ded62e035a8db188714a4e5ef4-avif/rayklein/Gallery/sunset.JPG',
     tag: 'Sunset',
     description: 'Sunset on the bund.'
-  }
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-058297c594cec4a027d65eba324bf2d7-avif/rayklein/Gallery/1.30Beijing.jpg',
+    tag: '1.30 Went to Beijing',
+    description: 'Set out!!'
+  },
 ];
 
 let currentImageIndex = 0;
