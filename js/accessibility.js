@@ -114,9 +114,8 @@
     }
 
     function togglePanel() {
-      var open = !panel.hidden;
-      panel.hidden = !open;
-      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.hidden = !panel.hidden;
+      trigger.setAttribute("aria-expanded", panel.hidden ? "false" : "true");
     }
 
     trigger.addEventListener("click", function () {
