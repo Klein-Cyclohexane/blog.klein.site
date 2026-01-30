@@ -45,6 +45,11 @@ const galleryData = [
     tag: '1.30 Went to Beijing',
     description: 'Set out!!'
   },
+  {
+    src: 'https://cdn.rthe.cn/cached-444ad9fcabadecd00af03b0724b85c8f-avif/rayklein/Gallery/arknights.jpg',
+    tag: 'Blind box',
+    description: 'Pulled Death Glimmer from the Arknights battle pass 😋'
+  },
 ];
 
 let currentImageIndex = 0;
