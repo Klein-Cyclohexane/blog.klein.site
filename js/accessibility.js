@@ -3,6 +3,11 @@
 
   var STORAGE_KEY = "blog-accessibility";
   var DEFAULTS = { textSize: "medium", lineHeight: "medium" };
+  var LEVELS = ["small", "medium", "large"];
+
+  function getIconUrl() {
+    return "https://cdn.rthe.cn/cached-b872faa45202a578895aa3b0a1fe2082-avif/rayklein/accessibility.webp";
+  }
 
   function getStored() {
     try {
@@ -25,31 +30,108 @@
   }
 
   function applyToBody(opts) {
+    var root = document.documentElement;
+    root.setAttribute("data-text-size", opts.textSize);
+    root.setAttribute("data-line-height", opts.lineHeight);
     document.body.setAttribute("data-text-size", opts.textSize);
     document.body.setAttribute("data-line-height", opts.lineHeight);
   }
 
-  function createOptionGroup(label, name, value, options) {
+  function levelToIndex(value) {
+    var i = LEVELS.indexOf(value);
+    return i >= 0 ? i : 1;
+  }
+
+  function indexToLevel(i) {
+    return LEVELS[i] || "medium";
+  }
+
+  function createSliderGroup(label, name, value, panel) {
     var group = document.createElement("div");
-    group.className = "accessibility-option-group";
+    group.className = "accessibility-slider-group";
+    group.setAttribute("data-option", name);
+
     var title = document.createElement("div");
     title.className = "accessibility-option-label";
     title.textContent = label;
     group.appendChild(title);
+
     var row = document.createElement("div");
-    row.className = "accessibility-option-row";
-    options.forEach(function (opt) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "accessibility-option-btn";
-      btn.textContent = opt;
-      btn.setAttribute("data-option", name);
-      btn.setAttribute("data-value", opt.toLowerCase());
-      if (opt.toLowerCase() === value) btn.classList.add("active");
-      row.appendChild(btn);
-    });
+    row.className = "accessibility-slider-row";
+
+    var track = document.createElement("div");
+    track.className = "accessibility-slider-track";
+
+    var input = document.createElement("input");
+    input.type = "range";
+    input.min = 0;
+    input.max = 2;
+    input.step = 1;
+    input.value = levelToIndex(value);
+    input.setAttribute("aria-label", label);
+    input.setAttribute("aria-valuemin", 0);
+    input.setAttribute("aria-valuemax", 2);
+    input.className = "accessibility-slider-input";
+
+    var fill = document.createElement("div");
+    fill.className = "accessibility-slider-fill";
+
+    var thumb = document.createElement("div");
+    thumb.className = "accessibility-slider-thumb";
+
+    track.appendChild(fill);
+    track.appendChild(thumb);
+    track.appendChild(input);
+    row.appendChild(track);
+
+    var labels = document.createElement("div");
+    labels.className = "accessibility-slider-labels";
+    labels.innerHTML = '<span data-value="0">Small</span><span data-value="1">Medium</span><span data-value="2">Large</span>';
+    row.appendChild(labels);
+
+    var valueLabel = document.createElement("div");
+    valueLabel.className = "accessibility-slider-value";
+    valueLabel.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+    row.appendChild(valueLabel);
+
     group.appendChild(row);
-    return group;
+
+    function updateFillAndThumb() {
+      var v = parseInt(input.value, 10);
+      var pct = (v / 2) * 100;
+      fill.style.width = pct + "%";
+      thumb.style.left = pct + "%";
+      valueLabel.textContent = indexToLevel(v).charAt(0).toUpperCase() + indexToLevel(v).slice(1);
+      input.setAttribute("aria-valuenow", v);
+    }
+
+    function snapFeedback() {
+      row.classList.add("accessibility-snap-active");
+      clearTimeout(row._snapTimer);
+      row._snapTimer = setTimeout(function () {
+        row.classList.remove("accessibility-snap-active");
+      }, 400);
+    }
+
+    updateFillAndThumb();
+
+    input.addEventListener("input", function () {
+      var v = parseInt(input.value, 10);
+      var val = indexToLevel(v);
+      updateFillAndThumb();
+      panel.setOption(name, val);
+      snapFeedback();
+    });
+
+    input.addEventListener("change", function () {
+      var v = parseInt(input.value, 10);
+      input.value = v;
+      updateFillAndThumb();
+      panel.setOption(name, indexToLevel(v));
+      snapFeedback();
+    });
+
+    return { group: group, input: input, updateFillAndThumb: updateFillAndThumb };
   }
 
   function init() {
@@ -65,8 +147,37 @@
     trigger.className = "accessibility-trigger";
     trigger.setAttribute("aria-expanded", "false");
     trigger.setAttribute("aria-haspopup", "true");
-    trigger.innerHTML =
-      '<span class="accessibility-trigger-icon" aria-hidden="true">A</span><span class="accessibility-trigger-label">Accessibility</span>';
+
+    var iconSpan = document.createElement("span");
+    iconSpan.className = "accessibility-trigger-icon";
+    iconSpan.setAttribute("aria-hidden", "true");
+    var img = document.createElement("img");
+    img.src = getIconUrl();
+    img.alt = "";
+    img.width = 24;
+    img.height = 24;
+    img.className = "accessibility-trigger-img";
+    var fallbackSpan = document.createElement("span");
+    fallbackSpan.className = "accessibility-trigger-fallback";
+    fallbackSpan.textContent = "A";
+    fallbackSpan.style.display = "none";
+    img.onerror = function () {
+      img.style.display = "none";
+      fallbackSpan.style.display = "inline";
+    };
+    img.onload = function () {
+      fallbackSpan.style.display = "none";
+      img.style.display = "inline-block";
+    };
+    iconSpan.appendChild(img);
+    iconSpan.appendChild(fallbackSpan);
+
+    trigger.appendChild(iconSpan);
+    var labelSpan = document.createElement("span");
+    labelSpan.className = "accessibility-trigger-label";
+    labelSpan.textContent = "Accessibility";
+    trigger.appendChild(labelSpan);
+
     wrap.appendChild(trigger);
 
     var panel = document.createElement("div");
@@ -80,38 +191,24 @@
     panelTitle.textContent = "Accessibility Options";
     panel.appendChild(panelTitle);
 
-    panel.appendChild(
-      createOptionGroup("Text size", "textSize", opts.textSize, [
-        "Small",
-        "Medium",
-        "Large",
-      ])
-    );
-    panel.appendChild(
-      createOptionGroup("Line spacing", "lineHeight", opts.lineHeight, [
-        "Small",
-        "Medium",
-        "Large",
-      ])
-    );
+    var panelAPI = {
+      setOption: function (name, value) {
+        opts[name] = value;
+        applyToBody(opts);
+        save(opts);
+        if (name === "textSize" && textSizeSlider.updateFillAndThumb) textSizeSlider.updateFillAndThumb();
+        if (name === "lineHeight" && lineHeightSlider.updateFillAndThumb) lineHeightSlider.updateFillAndThumb();
+      },
+    };
+
+    var textSizeSlider = createSliderGroup("Text size", "textSize", opts.textSize, panelAPI);
+    panel.appendChild(textSizeSlider.group);
+
+    var lineHeightSlider = createSliderGroup("Line spacing", "lineHeight", opts.lineHeight, panelAPI);
+    panel.appendChild(lineHeightSlider.group);
 
     wrap.appendChild(panel);
     document.body.appendChild(wrap);
-
-    function updateActiveButtons(name, value) {
-      wrap
-        .querySelectorAll('.accessibility-option-btn[data-option="' + name + '"]')
-        .forEach(function (btn) {
-          btn.classList.toggle("active", btn.getAttribute("data-value") === value);
-        });
-    }
-
-    function setOption(name, value) {
-      opts[name] = value;
-      applyToBody(opts);
-      save(opts);
-      updateActiveButtons(name, value);
-    }
 
     function togglePanel() {
       panel.hidden = !panel.hidden;
@@ -120,14 +217,6 @@
 
     trigger.addEventListener("click", function () {
       togglePanel();
-    });
-
-    panel.addEventListener("click", function (e) {
-      var btn = e.target.closest(".accessibility-option-btn");
-      if (!btn) return;
-      var name = btn.getAttribute("data-option");
-      var value = btn.getAttribute("data-value");
-      setOption(name, value);
     });
 
     document.addEventListener("click", function (e) {
