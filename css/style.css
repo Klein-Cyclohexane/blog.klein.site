@@ -743,14 +743,14 @@ body[data-line-height="large"] {
 .accessibility-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  border-radius: 999px;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
   border: 1px solid var(--color-hr);
   background: var(--color-background);
   color: var(--font-color);
-  font-size: 0.9rem;
-  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: all 0.25s ease;
@@ -762,19 +762,19 @@ body[data-line-height="large"] {
 }
 
 .accessibility-trigger-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-link);
 }
 
 .accessibility-trigger-icon .accessibility-trigger-img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   display: inline-block;
 }
@@ -929,12 +929,14 @@ body[data-line-height="large"] {
   }
 
   .accessibility-trigger {
-    padding: 10px 14px;
-    font-size: 0.85rem;
+    width: 44px;
+    height: 44px;
   }
 
-  .accessibility-trigger-label {
-    display: none;
+  .accessibility-trigger-icon,
+  .accessibility-trigger-icon .accessibility-trigger-img {
+    width: 24px;
+    height: 24px;
   }
 
   .accessibility-panel {

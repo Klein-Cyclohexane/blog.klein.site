@@ -173,10 +173,7 @@
     iconSpan.appendChild(fallbackSpan);
 
     trigger.appendChild(iconSpan);
-    var labelSpan = document.createElement("span");
-    labelSpan.className = "accessibility-trigger-label";
-    labelSpan.textContent = "Accessibility";
-    trigger.appendChild(labelSpan);
+    trigger.setAttribute("aria-label", "Accessibility options");
 
     wrap.appendChild(trigger);
 
