@@ -50,6 +50,16 @@ const galleryData = [
     tag: 'Blind box',
     description: 'Pulled Death Glimmer from the Arknights battle pass 😋'
   },
+  {
+    src: 'https://cdn.rthe.cn/cached-724b040c1c244950264a8e9c998bdd84-avif/rayklein/street.jpg',
+    tag: 'HaiDian Zhongjie',
+    description: 'The street in HaiDian District.'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-3d29485954d6099641dbe8b76bb94173-avif/rayklein/student_dormitory.jpg',
+    tag: 'Student Dormitory',
+    description: 'The 31st student dormitory.'
+  },
 ];
 
 let currentImageIndex = 0;
