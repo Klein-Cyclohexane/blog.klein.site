@@ -124,7 +124,10 @@ function initThemeToggle() {
   button.type = "button";
   button.className = "theme-toggle";
   button.innerHTML =
-    '<span class="theme-toggle-icon" aria-hidden="true"><span class="icon icon-sun">☀</span><span class="icon icon-moon">🌙</span></span>';
+    '<span class="theme-toggle-icon" aria-hidden="true">' +
+    '<img class="icon icon-sun" src="https://cdn.rthe.cn/cached-6e4c4995cda172f070b5a271b5acbc3b-avif/rayklein/sun_icon.png" alt="" width="24" height="24">' +
+    '<img class="icon icon-moon" src="https://cdn.rthe.cn/cached-cc8afbd532b73c711542a5e4c990770d-avif/rayklein/moon_icon.png" alt="" width="24" height="24">' +
+    '</span>';
 
   const nav = headerContainer.querySelector(".nav");
   if (nav && nav.nextSibling) {
