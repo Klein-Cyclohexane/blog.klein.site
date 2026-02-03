@@ -154,8 +154,8 @@
     var img = document.createElement("img");
     img.src = getIconUrl();
     img.alt = "";
-    img.width = 24;
-    img.height = 24;
+    img.width = 48;
+    img.height = 48;
     img.className = "accessibility-trigger-img";
     var fallbackSpan = document.createElement("span");
     fallbackSpan.className = "accessibility-trigger-fallback";

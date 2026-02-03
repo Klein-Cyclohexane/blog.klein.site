@@ -43,7 +43,19 @@
 
     if (arrow && postList) {
       arrow.addEventListener("click", function () {
-        postList.scrollIntoView({ behavior: "smooth", block: "start" });
+        const header = document.querySelector(".header");
+        const postTop = postList.getBoundingClientRect().top + window.scrollY;
+        let offset = 0;
+
+        if (header) {
+          const headerRect = header.getBoundingClientRect();
+          const headerStyles = window.getComputedStyle(header);
+          const topValue = parseFloat(headerStyles.top) || 0;
+          offset = headerRect.height + topValue;
+        }
+
+        const target = Math.max(0, postTop - offset);
+        window.scrollTo({ top: target, behavior: "smooth" });
       });
     }
   }

@@ -185,7 +185,8 @@ a {
   height: 64px;
   padding: 0;
   border: none;
-  background: transparent;
+  background: none;
+  outline: none;
   color: var(--font-color);
   cursor: pointer;
   opacity: 0;
@@ -198,9 +199,11 @@ a {
   display: block;
   width: 2px;
   height: 42px;
-  background: currentColor;
+  color: var(--font-color);
+  background-image: linear-gradient(180deg, transparent 0%, currentColor 35%, currentColor 100%);
   border-radius: 999px;
   overflow: visible;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
 .scroll-arrow-line::before,
@@ -238,8 +241,18 @@ a {
   color: var(--color-link);
 }
 
+.scroll-arrow:focus-visible {
+  color: var(--color-link);
+}
+
 .scroll-arrow:hover .scroll-arrow-line::before,
 .scroll-arrow:hover .scroll-arrow-line::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(45deg) translateY(2px);
+}
+
+.scroll-arrow:focus-visible .scroll-arrow-line::before,
+.scroll-arrow:focus-visible .scroll-arrow-line::after {
   opacity: 1;
   transform: translate(-50%, -50%) rotate(45deg) translateY(2px);
 }
@@ -883,40 +896,39 @@ body.accessibility-delayed .accessibility-widget {
   width: 48px;
   height: 48px;
   padding: 0;
-  border-radius: 50%;
-  border: 1px solid var(--color-hr);
-  background: var(--color-background);
+  border: none;
+  border-radius: 0;
+  background: none;
   color: var(--font-color);
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: all 0.25s ease;
+  box-shadow: none;
+  transition: color 0.25s ease;
 }
 
 .accessibility-trigger:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
-  border-color: var(--color-active);
+  color: var(--color-link);
 }
 
 .accessibility-trigger-icon {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--color-link);
 }
 
 .accessibility-trigger-icon .accessibility-trigger-img {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   display: inline-block;
 }
 
 .accessibility-trigger-icon .accessibility-trigger-fallback {
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--color-link);
 }
