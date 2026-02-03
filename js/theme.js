@@ -48,22 +48,106 @@ const themeMode = {
   dark: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css",
 };
 
-if (checkIsDarkMode()) {
-  switchThemeMode("dark");
-}
+const THEME_STORAGE_KEY = "blog-theme-mode";
+const rootElement = document.documentElement;
+const mqList = window.matchMedia("(prefers-color-scheme: dark)");
+let themeToggleButton = null;
+let manualTheme = getStoredManualTheme();
+let currentTheme = manualTheme || (mqList.matches ? "dark" : "light");
 
-var mqList = window.matchMedia("(prefers-color-scheme: dark)");
+applyTheme(currentTheme);
+switchThemeMode(currentTheme);
 
 observeMediaChange(mqList, (event) => {
-  // is dark mode
-  if (event.matches) {
-    console.log("switch to dark mode");
-    switchThemeMode("dark");
-  } else {
-    console.log("switch to light mode");
-    switchThemeMode("light");
+  if (manualTheme) {
+    return;
   }
+  currentTheme = event.matches ? "dark" : "light";
+  applyTheme(currentTheme);
+  switchThemeMode(currentTheme);
+  updateThemeToggleAppearance();
 });
+
+initThemeToggle();
+
+function getStoredManualTheme() {
+  try {
+    const value = localStorage.getItem(THEME_STORAGE_KEY);
+    if (value === "light" || value === "dark") {
+      return value;
+    }
+  } catch (err) {}
+  return null;
+}
+
+function persistManualTheme(value) {
+  try {
+    if (value === "light" || value === "dark") {
+      localStorage.setItem(THEME_STORAGE_KEY, value);
+    } else {
+      localStorage.removeItem(THEME_STORAGE_KEY);
+    }
+  } catch (err) {}
+}
+
+function applyTheme(theme) {
+  const mode = theme === "dark" ? "dark" : "light";
+  rootElement.setAttribute("data-theme", mode);
+  rootElement.style.colorScheme = mode;
+}
+
+function updateThemeToggleAppearance() {
+  if (!themeToggleButton) {
+    return;
+  }
+  themeToggleButton.dataset.theme = currentTheme;
+  const label =
+    currentTheme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+  themeToggleButton.setAttribute("aria-label", label);
+  themeToggleButton.setAttribute("title", label);
+}
+
+function initThemeToggle() {
+  const headerContainer = document.querySelector(".header-container");
+  if (!headerContainer) {
+    return;
+  }
+
+  const existingButton = headerContainer.querySelector(".theme-toggle");
+  if (existingButton) {
+    themeToggleButton = existingButton;
+    updateThemeToggleAppearance();
+    return;
+  }
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "theme-toggle";
+  button.innerHTML =
+    '<span class="theme-toggle-icon" aria-hidden="true"><span class="icon icon-sun">☀</span><span class="icon icon-moon">🌙</span></span>';
+
+  const nav = headerContainer.querySelector(".nav");
+  if (nav && nav.nextSibling) {
+    headerContainer.insertBefore(button, nav.nextSibling);
+  } else if (nav) {
+    headerContainer.appendChild(button);
+  } else {
+    headerContainer.appendChild(button);
+  }
+
+  themeToggleButton = button;
+  updateThemeToggleAppearance();
+
+  button.addEventListener("click", () => {
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+    currentTheme = nextTheme;
+    manualTheme = nextTheme;
+    persistManualTheme(nextTheme);
+    applyTheme(currentTheme);
+    switchThemeMode(currentTheme);
+    updateThemeToggleAppearance();
+  });
+}
 
 // Back to Top Button Functionality
 (function() {

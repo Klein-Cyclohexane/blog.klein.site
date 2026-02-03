@@ -41,11 +41,42 @@
   --spacing-xl: clamp(32px, 2.5vw, 48px);
 }
 
-@media (prefers-color-scheme: light) {
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --font-color: #fff;
+  --font-color-secondary: #cccccc;
+  --font-color-extra: #aaa;
+  --font-color-refer: #ccd0e0;
+
+  --color-hr: #cccccc;
+  --color-link: #61AEEE;
+  --color-background: #3b3e4a;
+
+  /* 激活与未激活状态 */
+  --color-unactive: #494949;
+  --color-active: #eeeeee;
+
+  --color-list-item-even: #3b3e4a;
+  --color-list-item-odd: #383c48;
+
+  /* 文章颜色 */
+  --color-post-content: #fefefe;
+  /* code 背景色 */
+  --color-background-code: #292c34;
+  --color-border-code: #292c34;
+
+  --color-hashtag: #e9ebf1;
+
+  --font-color-post: #dce4dd;
+
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not([data-theme]) {
     --font-color: #fff;
     --font-color-secondary: #cccccc;
     --font-color-extra: #aaa;
@@ -71,6 +102,8 @@
     --color-hashtag: #e9ebf1;
 
     --font-color-post: #dce4dd;
+
+    color-scheme: dark;
   }
 }
 
