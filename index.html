@@ -56,7 +56,15 @@
   </section>
 </header>
   <main class="main">
-    <div class="post-list">
+    <section class="home-hero" aria-label="Welcome">
+      <p class="hero-typing" id="hero-typing"></p>
+      <button type="button" class="scroll-arrow" id="scroll-arrow" aria-label="Scroll to posts">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </button>
+    </section>
+    <div class="post-list" id="post-list">
   <section class="post-item">
     <a class="post-item-title" href="/blog.klein.site/2026/01/31/JourneytoBeijing/">Journey to Beijing</a>
     <div class="post-item-summary">
@@ -158,6 +166,7 @@
   
 <script src="/blog.klein.site/js/theme.js"></script>
 <script src="/blog.klein.site/js/accessibility.js"></script>
+<script src="/blog.klein.site/js/home-hero.js"></script>
 
 </body>
 

@@ -140,6 +140,91 @@ a {
   transition: color 0.3s ease-in-out;
 }
 
+/* Home hero section - typing sentence */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: var(--spacing-xl) 8vw;
+  text-align: center;
+}
+
+.hero-typing {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  color: var(--font-color);
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.hero-typing::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: var(--font-color);
+}
+
+.hero-typing.typing-done::after {
+  display: none;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--color-hr);
+  border-radius: 50%;
+  background: var(--color-background);
+  color: var(--font-color);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+}
+
+.scroll-arrow.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-arrow:hover {
+  transform: translateX(-50%) translateY(-4px);
+  border-color: var(--color-link);
+  color: var(--color-link);
+}
+
+/* Desktop: hero is full-page, arrow shows after typing */
+@media screen and (min-width: 769px) {
+  .home-hero {
+    position: relative;
+    min-height: calc(100vh - 140px);
+  }
+}
+
+/* Mobile: no arrow, post list flows below sentence */
+@media screen and (max-width: 768px) {
+  .home-hero {
+    min-height: auto;
+    padding: var(--spacing-xl) 5vw var(--spacing-lg);
+  }
+
+  .scroll-arrow {
+    display: none;
+  }
+}
+
 .post-list {
   display: flex;
   flex-direction: column;
