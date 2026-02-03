@@ -10,8 +10,19 @@
     const el = document.getElementById("hero-typing");
     const arrow = document.getElementById("scroll-arrow");
     const postList = document.getElementById("post-list");
+    const body = document.body;
 
     if (!el) return;
+
+    if (body) {
+      body.classList.add("accessibility-delayed");
+    }
+
+    function revealAccessibility() {
+      if (body) {
+        body.classList.remove("accessibility-delayed");
+      }
+    }
 
     let index = 0;
     function typeNext() {
@@ -24,6 +35,7 @@
         if (arrow && window.matchMedia("(min-width: 769px)").matches) {
           arrow.classList.add("visible");
         }
+        revealAccessibility();
       }
     }
 
