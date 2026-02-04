@@ -1,4 +1,4 @@
 file/
 images/
 *.md
-
+!README.md
