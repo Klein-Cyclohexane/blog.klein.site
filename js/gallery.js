@@ -60,6 +60,16 @@ const galleryData = [
     tag: 'Student Dormitory',
     description: 'The 31st student dormitory.'
   },
+  {
+    src: 'https://cdn.rthe.cn/cached-14bdafd4380304c8db10b9ff88785e60-avif/rayklein/Gallery/dollcat.jpg'
+    tag: 'Ragdoll',
+    description: 'The cute Ragdoll cats in the pet supply store.'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-eec2f79000d407b72097127788c83e0e-avif/rayklein/Gallery/school_introduction.jpg',
+    tag: 'Campus Talk',
+    description: "Set up a booth in the high school library. The school's creative products were very popular among the younger students."
+  },
 ];
 
 let currentImageIndex = 0;

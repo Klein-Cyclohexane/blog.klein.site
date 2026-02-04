@@ -12,17 +12,17 @@
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  border: 1px solid var(--color-hr);
+  background: var(--color-background);
   font-size: var(--font-size-small);
-  color: #000000;
+  color: var(--font-color);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .post-toc-title {
   font-weight: 600;
   margin-bottom: var(--spacing-sm);
-  color: #000000;
+  color: var(--font-color);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -37,13 +37,13 @@
 }
 
 .post-toc-item a {
-  color: #000000;
+  color: var(--font-color);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .post-toc-item a:hover {
-  color: var(--font-color);
+  color: var(--color-link);
   text-decoration: underline;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .post-toc-item.is-active > a {
-  color: #000000;
+  color: var(--font-color);
   font-weight: 600;
 }
 
@@ -73,14 +73,13 @@
     padding: 14px 10px;
     border-radius: 999px;
     border: none;
-    background: #ffffff;
+    background: var(--color-background);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     transition: all 0.25s ease;
-    position: fixed;
   }
 
   .post-toc::before {
@@ -99,8 +98,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    /* 收起时 TOC 为蓝色渐变 */
-    background: linear-gradient(135deg, #0040E6, #0a7bdc);
+    background: linear-gradient(135deg, var(--color-link), color-mix(in srgb, var(--color-link) 85%, white));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -124,7 +122,7 @@
     display: block;
     height: 6px;
     border-radius: 999px;
-    background: #d0d0d0;
+    background: var(--color-unactive);
     text-indent: -9999px;
     overflow: hidden;
     padding: 0;
@@ -141,8 +139,8 @@
   }
 
   .post-toc-item.is-active > a {
-    background: #000000;
-    color: #ffffff;
+    background: var(--font-color);
+    color: var(--color-background);
   }
 
   /* Expanded state on hover/focus */
@@ -152,17 +150,16 @@
     padding: 18px 20px;
     border-radius: 18px;
     align-items: flex-start;
-    background: rgba(255,255,255,0.98);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    background: var(--color-background);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
   }
 
   .post-toc:hover .post-toc-title,
   .post-toc:focus-within .post-toc-title {
     text-align: left;
     margin-bottom: 6px;
-    /* 展开后改为纯黑文字 */
     background: none;
-    color: #000000;
+    color: var(--font-color);
   }
 
   .post-toc:hover .post-toc-list,
@@ -180,7 +177,7 @@
     height: auto;
     background: transparent;
     text-indent: 0;
-    color: #000000;
+    color: var(--font-color);
   }
 
   .post-toc:hover .post-toc-item.level-2 a,

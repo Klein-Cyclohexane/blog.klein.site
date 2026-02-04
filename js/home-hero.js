@@ -1,7 +1,3 @@
-/**
- * Home hero typing effect: "Sunrays will make you see the clouds."
- * Letter-by-letter typing, then show scroll arrow on desktop.
- */
 (function () {
   const HERO_TEXT = "Sunrays will make you see the clouds.";
   const TYPING_INTERVAL = 80;

@@ -314,13 +314,11 @@ function initThemeToggle() {
   updateProgress();
 })();
 
-// Mobile navigation (hamburger)
 (function() {
   const header = document.querySelector('.header-container');
   const nav = document.querySelector('.nav');
   if (!header || !nav) return;
 
-  // Only enhance on small screens; still safe elsewhere
   const toggle = document.createElement('button');
   toggle.className = 'nav-toggle';
   toggle.type = 'button';
