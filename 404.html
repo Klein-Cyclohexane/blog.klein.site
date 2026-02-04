@@ -3,55 +3,97 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-  <title>404</title>
+  <title>404 - Page Not Found | Klein's Blog</title>
 
+  <link rel="preconnect" href="https://cdn.rthe.cn" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.rthe.cn">
   <link rel="shortcut icon" href="https://cdn.rthe.cn/cached-42f6b14bc08dd45f53faa5adca3f5c9e-avif/rayklein/avatar.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/blog.klein.site/css/root.css">
+  <link rel="stylesheet" href="/blog.klein.site/css/style.css">
+  <link rel="stylesheet" href="/blog.klein.site/css/post.css">
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
+    html, body { overflow: hidden; }
     .page-404 {
-      position: relative;
-      height: 100vh;
+      min-height: calc(100vh - 180px);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: var(--color-background);
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-md);
     }
     .page-404-code {
-      font-size: clamp(6rem, 20vw, 12rem);
+      font-size: clamp(4rem, 12vw, 8rem);
       font-weight: 700;
-      color: var(--font-color);
+      color: var(--color-link);
       line-height: 1;
+      margin-bottom: var(--spacing-md);
       font-family: "JetBrains Mono", monospace;
     }
-    .page-404-link {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+    .page-404-title {
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 600;
       color: var(--font-color);
-      font-size: 0.9rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    .page-404-desc {
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      color: var(--font-color-secondary);
+      margin-bottom: var(--spacing-xl);
+      max-width: 400px;
+      line-height: 1.6;
+    }
+    .page-404-link {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--color-link);
+      color: white;
       text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.2s ease;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: filter 0.2s ease, transform 0.2s ease;
     }
     .page-404-link:hover {
-      opacity: 1;
-      text-decoration: underline;
+      filter: brightness(1.1);
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
-  <div class="page-404">
-    <span class="page-404-code">404</span>
-    <a class="page-404-link" href="/blog.klein.site/">Back to Main Page</a>
-  </div>
+  <header class="header">
+    <section class="header-container">
+      <a class="logo" href="/blog.klein.site/">Klein's Blog</a>
+      <ul class="nav">
+        <li><a href="/blog.klein.site/tags/Blog">Blog</a></li>
+        <li><a href="/blog.klein.site/tags/Note">Note</a></li>
+        <li><a href="/blog.klein.site/tags/Gallery">Gallery</a></li>
+        <li><a href="/blog.klein.site/archives">archives</a></li>
+        <li><a href="/blog.klein.site/about">about</a></li>
+      </ul>
+    </section>
+  </header>
+
+  <main class="main">
+    <section class="page-404" aria-label="Page not found">
+      <p class="page-404-code" aria-hidden="true">404</p>
+      <h1 class="page-404-title">Page Not Found</h1>
+      <p class="page-404-desc">The page you're looking for doesn't exist or has been moved.</p>
+      <a class="page-404-link" href="/blog.klein.site/">Back to Home</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Copyright © 2026 Klein</span>
+  </footer>
+
   <script src="/blog.klein.site/js/theme.js"></script>
+  <script src="/blog.klein.site/js/accessibility.js"></script>
 </body>
 </html>
