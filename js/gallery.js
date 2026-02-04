@@ -61,7 +61,7 @@ const galleryData = [
     description: 'The 31st student dormitory.'
   },
   {
-    src: 'https://cdn.rthe.cn/cached-14bdafd4380304c8db10b9ff88785e60-avif/rayklein/Gallery/dollcat.jpg'
+    src: 'https://cdn.rthe.cn/cached-14bdafd4380304c8db10b9ff88785e60-avif/rayklein/Gallery/dollcat.jpg',
     tag: 'Ragdoll',
     description: 'The cute Ragdoll cats in the pet supply store.'
   },
