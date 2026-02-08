@@ -3,4 +3,4 @@ images/
 *.md
 markdown-demo/
 !README.md
-
+!Slides.md
