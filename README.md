@@ -1,3 +1,37 @@
+## Markdown Support
+
+The blog supports **Markdown** for writing content in two ways:
+
+### 1. Load from external `.md` file
+
+```html
+<main class="post-content" data-markdown-src="/blog.klein.site/content/your-post.md">
+  <p>Loading...</p>
+</main>
+```
+
+Place your `.md` file in `content/` and reference it with `data-markdown-src`.
+
+### 2. Inline markdown in HTML
+
+```html
+<main class="post-content"></main>
+<script type="text/markdown" data-target=".post-content">
+# Hello World
+This is **markdown** content.
+</script>
+```
+
+**Required scripts** (add to post layout):
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<script src="/blog.klein.site/js/markdown.js"></script>
+```
+
+See [markdown-demo/index.html](markdown-demo/index.html) for a working example.
+
+---
+
 ## Tech Stack
 
 - **Generator**: Hexo 7.3.0
@@ -6,7 +40,7 @@
 - **Highlighting**: highlight.js
 
 ## Features
-**All images and documents have been uploaded to the CDN.**
+**All images and documents(pdf) have been uploaded to the CDN.**
 - **Theme Toggle**: Light / dark mode with system preference support
 - **Accessibility**: Text size and line spacing controls, keyboard navigation
 - **Responsive Design**: Mobile-first layout with breakpoints at 480px, 768px, 1024px

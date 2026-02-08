@@ -1,4 +1,6 @@
 file/
 images/
 *.md
+markdown-demo/
 !README.md
+

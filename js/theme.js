@@ -224,11 +224,15 @@ function initThemeToggle() {
   main.insertBefore(nav, main.firstElementChild);
 })();
 
-// Table of Contents (TOC)
-(function() {
+// Table of Contents (TOC) - also rebuilds on markdown-rendered for client-side Markdown
+function buildTOC() {
   const post = document.querySelector('article.post');
   const content = document.querySelector('.post-content');
   if (!post || !content) return;
+
+  // Remove existing TOC so we can rebuild (needed when Markdown loads async)
+  const existingToc = post.querySelector('.post-toc');
+  if (existingToc) existingToc.remove();
 
   const headings = content.querySelectorAll('h2, h3');
   if (!headings.length) return;
@@ -289,7 +293,10 @@ function initThemeToggle() {
   } else {
     post.insertBefore(toc, post.firstChild);
   }
-})();
+}
+
+buildTOC();
+document.addEventListener('markdown-rendered', buildTOC);
 
 // Reading progress bar
 (function() {
