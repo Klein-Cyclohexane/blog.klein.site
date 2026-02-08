@@ -10,7 +10,7 @@
 ### R-type
 - sll, srl, sra, xor, sltu
 
-### Implementation
+#### Implementation
 Based on the basic instruction set, we update ALU module to support additional arithmetic operations, with control signals generated via funct3 and funct7(srl vs sra)
 
 
@@ -60,7 +60,7 @@ There are only two U-type instructions: `lui` directly assigns the high-order im
 
 ## RV32M
 
-### Instruction
+#### Instruction
 - mul, mulh, mulsu, mulu, div, divu, rem, remu
 
 #### Implementation
