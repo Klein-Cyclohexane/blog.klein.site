@@ -70,6 +70,11 @@ const galleryData = [
     tag: 'Campus Talk',
     description: "Set up a booth in the high school library. The school's creative products were very popular among the younger students."
   },
+  {
+    src: 'https://cdn.rthe.cn/cached-3504adf7a37b89d103aa4e6a9bb47e1c-avif/rayklein/Gallery/hfyz.jpg',
+    tag: 'Hefei NO.1 middle School',
+    description: 'Given a lecture in hfyz.'
+  },
 ];
 
 let currentImageIndex = 0;
