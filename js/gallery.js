@@ -73,7 +73,27 @@ const galleryData = [
   {
     src: 'https://cdn.rthe.cn/cached-3504adf7a37b89d103aa4e6a9bb47e1c-avif/rayklein/Gallery/hfyz.jpg',
     tag: 'Hefei NO.1 middle School',
-    description: 'Given a lecture in hfyz.'
+    description: 'Give a lecture in hfyz.'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-b980583ad20282dddfbf9a40183ae87d-avif/rayklein/Gallery/tablegame.jpg',
+    tag: 'Table Game',
+    description: 'Play table games with friends.'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-567f5d3050fe5f80847d3e342e16cdc0-avif/rayklein/Gallery/lastkwk.jpg',
+    tag: 'Last Come Wonka',
+    description: 'The last Come Wonka 😭'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-4e220ca7f0b862d4a6ac898a1e7bdb89-avif/rayklein/Gallery/xzyynb.jpg',
+    tag: '大帅哥徐张义阳',
+    description: '太帅了徐张'
+  },
+  {
+    src: 'https://cdn.rthe.cn/cached-5f76449119e1e735780f771d74e5f93c-avif/rayklein/Gallery/gourpphoto.jpg',
+    tag: 'Take a group photo~',
+    description: 'There are four people from PKU, one from CUC, and one from SHTU(:'
   },
 ];
 
