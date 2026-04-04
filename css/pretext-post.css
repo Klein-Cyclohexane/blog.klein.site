@@ -1,4 +1,4 @@
-/* Pre-text article: Pretext line blocks + figures */
+/* Pre-text article: Pretext + draggable float figures */
 
 .post-content.pretext-article {
   max-width: 42rem;
@@ -27,23 +27,79 @@
   letter-spacing: 0.02em;
 }
 
+/* Section: draggable image + reflowing text */
+.pretext-flow-section {
+  position: relative;
+  margin: 1.5em 0;
+  min-height: 5rem;
+}
+
+.pretext-float-figure {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  left: 8px;
+  top: 8px;
+  max-width: 36%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pretext-float-figure:active {
+  cursor: grabbing;
+}
+
+.pretext-float-figure img.pretext-draggable {
+  width: 100%;
+  max-width: 132px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  display: block;
+  pointer-events: auto;
+}
+
+.pretext-drag-hint {
+  margin-top: 0.35em;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  color: var(--font-color-extra);
+  font-style: normal;
+  max-width: 132px;
+}
+
+.pretext-lines-area {
+  position: relative;
+  width: 100%;
+}
+
+.pretext-lines-area .pretext-line {
+  position: absolute;
+  height: auto;
+  min-height: 28px;
+}
+
+/* Static figures (no following text) */
 .pretext-figure {
-  margin: 1.75em 0;
+  margin: 1.25em 0;
   text-align: center;
 }
 
 .pretext-figure img {
-  max-width: 100%;
+  max-width: 132px;
+  width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   display: inline-block;
   vertical-align: middle;
 }
 
 .pretext-caption {
-  margin-top: 0.6em;
-  font-size: clamp(0.8rem, 0.9vw, 0.875rem);
+  margin-top: 0.5em;
+  font-size: clamp(0.75rem, 0.85vw, 0.8rem);
   color: var(--font-color-extra);
   font-style: italic;
 }
@@ -53,5 +109,19 @@
     font-size: 15px;
     line-height: 26px;
     height: 26px;
+  }
+
+  .pretext-lines-area .pretext-line {
+    min-height: 26px;
+  }
+
+  .pretext-float-figure img.pretext-draggable,
+  .pretext-figure img {
+    max-width: 108px;
+  }
+
+  .pretext-drag-hint {
+    max-width: 108px;
+    font-size: 0.65rem;
   }
 }
