@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "- **Generator**: Hexo 7.3.0\r - **Styling**: Vanilla CSS with CSS custom properties (variables)\r - **Fonts**: Montserrat, JetBrains Mono (Google Fonts)\r - **Highlighting**: highlight.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vendor:pretext": "node copy-pretext-vendor.js",
+    "postinstall": "node copy-pretext-vendor.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klein-Cyclohexane/blog.klein.site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Klein-Cyclohexane/blog.klein.site/issues"
+  },
+  "homepage": "https://github.com/Klein-Cyclohexane/blog.klein.site#readme",
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.4"
+  }
+}

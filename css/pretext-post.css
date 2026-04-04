@@ -1,0 +1,57 @@
+/* Pre-text article: Pretext line blocks + figures */
+
+.post-content.pretext-article {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pretext-loading,
+.pretext-error {
+  color: var(--font-color-secondary);
+  font-size: var(--font-size-small);
+}
+
+.pretext-block {
+  margin-bottom: 1.25em;
+}
+
+.pretext-line {
+  white-space: pre;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 28px;
+  height: 28px;
+  color: var(--color-post-content);
+  letter-spacing: 0.02em;
+}
+
+.pretext-figure {
+  margin: 1.75em 0;
+  text-align: center;
+}
+
+.pretext-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pretext-caption {
+  margin-top: 0.6em;
+  font-size: clamp(0.8rem, 0.9vw, 0.875rem);
+  color: var(--font-color-extra);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .pretext-line {
+    font-size: 15px;
+    line-height: 26px;
+    height: 26px;
+  }
+}

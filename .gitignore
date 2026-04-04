@@ -1,6 +1,17 @@
 file/
 images/
+node_modules/
+# JSON: keep root npm manifests on GitHub; other *.json stays local-only if you add any
+*.json
+!package.json
+!package-lock.json
+# image/: figure binaries stay local / use CDN; keep text.txt for Pre-text page on GitHub Pages
+image/*
+!image/04/
+image/04/*
+!image/04/text.txt
 *.md
 markdown-demo/
 !README.md
 !Slides.md
+scripts/

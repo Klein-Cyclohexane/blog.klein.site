@@ -1,0 +1,11 @@
+[[IMAGE 1]]
+
+Typography on the web usually leans on the browser’s layout engine for every line break and height. Pretext takes a different path: it measures words once with canvas, caches widths, then lays out lines with pure arithmetic—no reflow storm when you resize or virtualize long copy.
+
+[[IMAGE 2]]
+
+This note pairs that idea with a simple editorial flow: plain text in text.txt, figures from image/04, and a layout pass that mirrors the blog’s Montserrat body size so what you measure is what you see.
+
+[[IMAGE 3]]
+
+If you change the copy, edit text.txt only. Swap [[IMAGE n]] markers to move figures. Re-run the page; prepare runs once per block, layout runs on each resize—fast enough for a static article and a useful pattern for denser UIs later.
