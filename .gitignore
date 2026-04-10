@@ -11,6 +11,7 @@ image/*
 image/04/*
 !image/04/text.txt
 *.md
+markdown template.md
 markdown-demo/
 !README.md
 !Slides.md
