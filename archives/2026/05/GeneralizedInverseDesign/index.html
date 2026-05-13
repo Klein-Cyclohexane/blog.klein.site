@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>Deep-learning enabled generalized inverse design of multi-port radio-frequency and sub-terahertz passives and integrated circuit 丨 Klein's Blog</title>
+
+  <link rel="preconnect" href="https://cdn.rthe.cn" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.rthe.cn">
+  <link rel="shortcut icon" href="https://cdn.rthe.cn/cached-42f6b14bc08dd45f53faa5adca3f5c9e-avif/rayklein/avatar.png" type="image/png">
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/blog.klein.site/css/root.css">
+  <link rel="stylesheet" href="/blog.klein.site/css/style.css">
+  <link rel="stylesheet" href="/blog.klein.site/css/post.css">
+  <meta name="generator" content="Hexo 7.3.0">
+</head>
+<body>
+  <header class="header">
+    <section class="header-container">
+      <a class="logo" href="/blog.klein.site/">Klein's Blog</a>
+      <ul class="nav">
+        <li><a href="/blog.klein.site/tags/Blog">Blog</a></li>
+        <li><a href="/blog.klein.site/tags/Note">Note</a></li>
+        <li><a href="/blog.klein.site/tags/Gallery">Gallery</a></li>
+        <li><a href="/blog.klein.site/archives">archives</a></li>
+        <li><a href="/blog.klein.site/about">about</a></li>
+      </ul>
+    </section>
+  </header>
+
+  <main class="main">
+    <article class="post">
+      <div class="post-title">Deep-learning enabled generalized inverse design of multi-port radio-frequency and sub-terahertz passives and integrated circuit</div>
+      <div class="post-meta">
+        <div class="date">2026 May 13th</div>
+        <div class="tags">
+          <div class="tag-item">Note</div>
+        </div>
+      </div>
+
+      <main class="post-content"></main>
+
+      <script type="text/markdown" data-target=".post-content">
+# Title:Deep-learning enabled generalized inverse design of multi-port radio-frequency and sub-terahertz passives and integrated circuit
+## Date:Wed 13th 2026
+### Tag: Note
+
+原来电路板不一定非得是方方正正的，还可以像被狗啃过一样
+
+从小我就觉得，电路板这东西就该是横平竖直、规规矩矩的，像城市规划一样井井有条。直到看到这篇文章，大一小登才意识到，这种"强迫症式"的设计思路，搞不好是在给自己挖坑。
+
+<img src="https://cdn.rthe.cn/cached-9962a0bab2acbed6cefb1119820ed1ab-avif/rayklein/title.png" alt="title" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+**Abstract**
+
+你现在手机里的5G信号、未来的6G通信、自动驾驶雷达，靠的都是一种叫做**毫米波/太赫兹芯片**的玩意。这些芯片上布满了各种结构——天线、滤波器、功分器、耦合器……它们就像一个城市的"路网"，信号在这些金属纹路里跑来跑去
+
+传统上，人类工程师咋设计这些路网呢？
+
+1. 先挑一个经验里最顺眼的模板（方的、圆的）。
+2. 然后手动调参数，一遍遍跑电磁仿真。
+3. 这个过程极其痛苦，而且从头到尾都被初始模板的限制给框死了。
+
+十分典型的From Bottom to Top方法
+
+打个比方：别人给你一张白纸让你画路线图，你却先自己画了个田字格，然后只在田字格里面做优化——这不是自己卡自己脖子么。
+
+没关系，NCS会出手，深度学习模型会出手。这篇24年发表在Nature Communication上的文章展示了一种新的操作，核心叫"广义逆设计"，翻译成人话就是From Top to Bottom。这种设计可以用于任意形状的复杂多端口（1-4多端口通用）电磁结构，并具有设计师定义的辐射和散射特性，并与有源电路共同设计，实现了真正的端到端。
+
+先告诉AI你要啥效果——比如"我要一个谐振频率为24GHz的天线"，或者"我要一个在60GHz把信号均匀分成两路，还刚好岔开90度的分路器"。AI收到需求之后，自己在一个25×25像素的画布上给你"变异"出最合适的金属几何形状。
+
+<img src="https://cdn.rthe.cn/cached-790a9dc9d585a1269aa7610a239982ec-avif/rayklein/CNNnetwork.png" alt="CNNnetwork" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+具体怎么"变异"呢？研究人员使用了卷积神经网络（CNN） 。你把任意形状的金属纹路给它看，它能瞬间算出这玩意会有什么电磁行为——本来跑一次精确电磁仿真要花老长时间，现在直接免了。首先将像素化的平面电磁结构图像作为输入，通过EM仿真得到全频段S参数与辐射方向图，通过几何翻转等方式做数据增强，使用迁移学习构建训练集。结构图像输入CNN后，经多层卷积、归一化、Leaky ReLU激活，再经全连接层输出预测的多端口S参数与辐射特性；为了防止预测结果出现数值误差导致违背无源特性，用最小扰动修正算法将S参数约束在[-1,1]区间，保证无源结构物理合理性。用Adam优化器反向传播更新卷积核与全连接层权重；引入早停机制避免过拟合。
+
+有了这个快速评估能力，就可以上**遗传算法**了。随机生一堆"二维码"形状的结构，让它们像生物一样优胜劣汰、交叉变异。跑个100代左右，一个长得完全不像人类作品的结构就出炉了。
+
+这个深度学习模型对任意25x25像素多端口结构，在24-80GHz频段预测误差极低，且S参数高度贴合HFSS仿真。传统电磁仿真优化一个三端口结构，大概要跑40万次仿真，耗时约29天。AI+遗传算法的方案，一旦模型训练好，合成只需**几分钟**。
+
+<img src="https://cdn.rthe.cn/cached-09efa7ecf6746034bb9518dfd66088df-avif/rayklein/prediction.png" alt="prediction" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+你以为的天线：规整的贴片。AI做的天线：长得跟外星人留下的符号似的，但面积只有常规贴片天线的1/2.25，还支持双频段工作（25和28GHz）。
+
+你以为的功分器：对称的树状分叉，两边完全一样。AI做的功分器：奇形怪状，但它能在60GHz精准地把信号平均分两路，相位差精准卡在88°。
+
+你以为的滤波器：像梳子一样的平行耦合线。AI做的滤波器：乍一看像二维码打印失败，但它在50-60GHz过滤信号的效果一点不含糊。
+
+<img src="https://cdn.rthe.cn/cached-444b382c9867b5c47bd53f4f2763af52-avif/rayklein/structure.png" alt="structure" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+作者不止做了无源器件，还流片做了一个完整的宽带毫米波放大器。信号进来之后，被一个AI设计的"三端口不对称分路器"岔成两路。这两路信号经过不同级数的放大，会产生一个频率相关的相位差。然后在输出端，AI设计的"三端口不对称合路器"恰好给出相反方向的相位差，一正一负抵消，信号完美合体。
+
+这种不对称的设计，人类工程师靠手算基本搞不出来。深度学习模型不仅搞出来了，还实测跑出23.6-37.3GHz的宽带，增益最高17.5dB，直接覆盖了绝大部分商用5G频段。
+
+这篇论文让我服气的地方倒不是"AI又赢了"这个narrative——毕竟2026年了，谁还没见过几个AI打爆人类的新闻呢。
+
+几十年来，电路工程师一直在规则的几何图形里修修补补，努着力逼近那个理论上存在的性能天花板。现在有人告诉你，"你画第一根线的时候就注定够不到天花板了，因为天花板在那个田字格外边。"AI之所以能突破，或许靠的不是比人类更聪明，而是比人类更没有"偏见"
+
+不过作者也说了，AI生成的设计里也有不少废品，需要人类设计师来纠错。"重点不是用工具取代人类，"他说，"而是用新工具帮人干得更好。"
+
+读到这辛苦了
+
+---
+
+原文链接：https://www.nature.com/articles/s41467-024-54178-1
+      </script>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <span>Copyright &copy; 2026 Klein</span>
+  </footer>
+
+  <script src="/blog.klein.site/js/theme.js"></script>
+  <script src="/blog.klein.site/js/accessibility.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/lib/marked.umd.min.js"></script>
+  <script src="/blog.klein.site/js/markdown.js"></script>
+</body>
+</html>
