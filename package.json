@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/Klein-Cyclohexane/blog.klein.site#readme",
   "dependencies": {
-    "@chenglou/pretext": "^0.0.4"
+    "@chenglou/pretext": "^0.0.7"
   }
 }

@@ -2,7 +2,7 @@
  * Pre-text: French copy in image/04/text.txt, CDN figures, @chenglou/pretext.
  * Draggable images reflow the following paragraph via layoutNextLine (per-line width).
  */
-import { prepareWithSegments, layoutNextLine, setLocale } from "./vendor/pretext/layout.js";
+import { prepareWithSegments, layoutNextLine, layoutNextLineRange, materializeLineRange, setLocale } from "./vendor/pretext/layout.js";
 
 setLocale("fr");
 
@@ -18,10 +18,12 @@ const IMAGE_CDN = {
 
 const IMAGE_EXTS = [".svg", ".webp", ".jpg", ".jpeg", ".png"];
 
-const FONT_DESKTOP = '400 17px Montserrat, Helvetica, Arial, sans-serif';
+const FONT_DESKTOP = '400 17px Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
 const LINE_HEIGHT_DESKTOP = 28;
-const FONT_MOBILE = '400 15px Montserrat, Helvetica, Arial, sans-serif';
+const LETTER_SPACING_DESKTOP = 0.34; // 0.02em × 17px
+const FONT_MOBILE = '400 15px Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
 const LINE_HEIGHT_MOBILE = 26;
+const LETTER_SPACING_MOBILE = 0.30; // 0.02em × 15px
 
 /** @type {Map<string, { l: number, t: number }>} */
 const floatPositions = new Map();
@@ -56,9 +58,9 @@ function parseText(raw) {
 
 function currentFontAndLineHeight() {
   if (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) {
-    return { font: FONT_MOBILE, lineHeight: LINE_HEIGHT_MOBILE };
+    return { font: FONT_MOBILE, lineHeight: LINE_HEIGHT_MOBILE, letterSpacing: LETTER_SPACING_MOBILE };
   }
-  return { font: FONT_DESKTOP, lineHeight: LINE_HEIGHT_DESKTOP };
+  return { font: FONT_DESKTOP, lineHeight: LINE_HEIGHT_DESKTOP, letterSpacing: LETTER_SPACING_DESKTOP };
 }
 
 function contentMaxWidth(el) {
@@ -67,8 +69,8 @@ function contentMaxWidth(el) {
 }
 
 function layoutParagraph(container, text, maxWidth) {
-  const { font, lineHeight } = currentFontAndLineHeight();
-  const prepared = prepareWithSegments(text, font);
+  const { font, lineHeight, letterSpacing } = currentFontAndLineHeight();
+  const prepared = prepareWithSegments(text, font, { letterSpacing });
   let cursor = { segmentIndex: 0, graphemeIndex: 0 };
   const block = document.createElement("div");
   block.className = "pretext-block";
@@ -125,8 +127,9 @@ function layoutFlowLines(linesArea, prepared, lineHeight, sectionWidth, img, sec
   for (let iter = 0; iter < 8000; iter++) {
     const rect = f();
     const { x, maxW } = lineLayout(y, lineHeight, sectionWidth, rect);
-    const line = layoutNextLine(prepared, cursor, maxW);
-    if (line === null) break;
+    const range = layoutNextLineRange(prepared, cursor, maxW);
+    if (range === null) break;
+    const line = materializeLineRange(prepared, range);
     const el = document.createElement("div");
     el.className = "pretext-line";
     el.style.position = "absolute";
@@ -134,7 +137,7 @@ function layoutFlowLines(linesArea, prepared, lineHeight, sectionWidth, img, sec
     el.style.top = y + "px";
     el.textContent = line.text;
     linesArea.appendChild(el);
-    cursor = line.end;
+    cursor = range.end;
     y += lineHeight;
   }
 
@@ -199,8 +202,8 @@ function wireDrag(wrap, img, section, relayout) {
 }
 
 function createFlowSection(container, imageIndex, body, sectionWidth, key) {
-  const { font, lineHeight } = currentFontAndLineHeight();
-  const prepared = prepareWithSegments(body, font);
+  const { font, lineHeight, letterSpacing } = currentFontAndLineHeight();
+  const prepared = prepareWithSegments(body, font, { letterSpacing });
 
   const section = document.createElement("div");
   section.className = "pretext-flow-section";
