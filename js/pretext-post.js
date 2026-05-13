@@ -151,16 +151,16 @@ function wireDrag(wrap, img, section, relayout) {
   let drag = null;
 
   function clampPos(left, top) {
-    const pad = 4;
-    const W = section.clientWidth;
-    const H = Math.max(section.clientHeight, 200);
     const iw = wrap.offsetWidth;
     const ih = wrap.offsetHeight;
-    const maxL = Math.max(pad, W - iw - pad);
-    const maxT = Math.max(pad, H - ih - pad);
+    // Keep at least 20px of the image visible so it can be grabbed again
+    const minX = -(iw - 20);
+    const minY = -(ih - 20);
+    const maxX = section.clientWidth - 20;
+    const maxY = Math.max(section.clientHeight, 400) - 20;
     return {
-      l: Math.min(maxL, Math.max(pad, left)),
-      t: Math.min(maxT, Math.max(pad, top)),
+      l: Math.min(maxX, Math.max(minX, left)),
+      t: Math.min(maxY, Math.max(minY, top)),
     };
   }
 
