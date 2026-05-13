@@ -50,15 +50,13 @@
       <main class="post-content"></main>
 
       <script type="text/markdown" data-target=".post-content">
-# Title:Deep-learning enabled generalized inverse design of multi-port radio-frequency and sub-terahertz passives and integrated circuit
-## Date:Wed 13th 2026
-### Tag: Note
-
 原来电路板不一定非得是方方正正的，还可以像被狗啃过一样
 
 从小我就觉得，电路板这东西就该是横平竖直、规规矩矩的，像城市规划一样井井有条。直到看到这篇文章，大一小登才意识到，这种"强迫症式"的设计思路，搞不好是在给自己挖坑。
 
 <img src="https://cdn.rthe.cn/cached-9962a0bab2acbed6cefb1119820ed1ab-avif/rayklein/title.png" alt="title" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+*Generalized inverse design enables automated synthesis of complex multi-port electromagnetic structures directly from user-defined performance specifications.*
 
 **Abstract**
 
@@ -80,6 +78,8 @@
 
 <img src="https://cdn.rthe.cn/cached-790a9dc9d585a1269aa7610a239982ec-avif/rayklein/CNNnetwork.png" alt="CNNnetwork" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
 
+*Inverse synthesis of arbitrary multi-port electromagnetic structures with desired scattering and radiating properties.*
+
 具体怎么"变异"呢？研究人员使用了卷积神经网络（CNN） 。你把任意形状的金属纹路给它看，它能瞬间算出这玩意会有什么电磁行为——本来跑一次精确电磁仿真要花老长时间，现在直接免了。首先将像素化的平面电磁结构图像作为输入，通过EM仿真得到全频段S参数与辐射方向图，通过几何翻转等方式做数据增强，使用迁移学习构建训练集。结构图像输入CNN后，经多层卷积、归一化、Leaky ReLU激活，再经全连接层输出预测的多端口S参数与辐射特性；为了防止预测结果出现数值误差导致违背无源特性，用最小扰动修正算法将S参数约束在[-1,1]区间，保证无源结构物理合理性。用Adam优化器反向传播更新卷积核与全连接层权重；引入早停机制避免过拟合。
 
 有了这个快速评估能力，就可以上**遗传算法**了。随机生一堆"二维码"形状的结构，让它们像生物一样优胜劣汰、交叉变异。跑个100代左右，一个长得完全不像人类作品的结构就出炉了。
@@ -88,6 +88,8 @@
 
 <img src="https://cdn.rthe.cn/cached-09efa7ecf6746034bb9518dfd66088df-avif/rayklein/prediction.png" alt="prediction" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
 
+*CNN-predicted S-parameters closely match HFSS simulations across 24–80 GHz, while genetic algorithm optimization converges within minutes — versus ~29 days for conventional brute-force EM simulation.*
+
 你以为的天线：规整的贴片。AI做的天线：长得跟外星人留下的符号似的，但面积只有常规贴片天线的1/2.25，还支持双频段工作（25和28GHz）。
 
 你以为的功分器：对称的树状分叉，两边完全一样。AI做的功分器：奇形怪状，但它能在60GHz精准地把信号平均分两路，相位差精准卡在88°。
@@ -95,6 +97,8 @@
 你以为的滤波器：像梳子一样的平行耦合线。AI做的滤波器：乍一看像二维码打印失败，但它在50-60GHz过滤信号的效果一点不含糊。
 
 <img src="https://cdn.rthe.cn/cached-444b382c9867b5c47bd53f4f2763af52-avif/rayklein/structure.png" alt="structure" style="display:block;margin:20pt auto;max-width:80%;height:auto;">
+
+*Conventional human-designed structures versus AI-generated counterparts: the AI-optimized antenna achieves dual-band operation (25 & 28 GHz) at 1/2.25 the area; the asymmetric power divider delivers precise 88° phase balance at 60 GHz; the filter matches traditional performance at 50–60 GHz with an unconventional topology.*
 
 作者不止做了无源器件，还流片做了一个完整的宽带毫米波放大器。信号进来之后，被一个AI设计的"三端口不对称分路器"岔成两路。这两路信号经过不同级数的放大，会产生一个频率相关的相位差。然后在输出端，AI设计的"三端口不对称合路器"恰好给出相反方向的相位差，一正一负抵消，信号完美合体。
 
