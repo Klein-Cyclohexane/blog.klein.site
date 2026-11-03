@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lyrics · Klein's Blog</title>
+  <link rel="icon" href="https://cdn.rthe.cn/cached-42f6b14bc08dd45f53faa5adca3f5c9e-avif/rayklein/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../../css/root.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/lyrics.css">
+</head>
+
+<body>
+  <header class="header">
+    <section class="header-container">
+      <a class="logo" href="../../">Klein's Blog</a>
+      <ul class="nav">
+        <li><a href="../Blog/">Blog</a></li>
+        <li><a href="../Note/">Note</a></li>
+        <li><a href="../Gallery/">Gallery</a></li>
+        <li><a href="./" aria-current="page">Lyrics</a></li>
+        <li><a href="../../archives/">archives</a></li>
+        <li><a href="../../about/">about</a></li>
+      </ul>
+    </section>
+  </header>
+
+  <main class="main lyrics">
+    <nav class="lyrics-path" aria-label="Lyrics navigation" hidden></nav>
+    <header class="lyrics-intro">
+      <h1>Lyrics</h1>
+      <p class="lyrics-description">Lyric excerpts, photos, and listening notes</p>
+    </header>
+    <div class="lyrics-content"></div>
+    <noscript>
+      <p>Enable JavaScript to browse the tracks.</p>
+    </noscript>
+  </main>
+
+  <template id="lyrics-genre">
+    <section class="lyrics-genre">
+      <header class="lyrics-genre-header">
+        <h2></h2>
+        <a class="lyrics-view-all">View all <span aria-hidden="true">→</span></a>
+      </header>
+    </section>
+  </template>
+
+  <template id="lyrics-card">
+    <li>
+      <a class="lyrics-card">
+        <img alt="" width="960" height="600" decoding="async">
+        <span class="lyrics-card-title"></span>
+        <span class="lyrics-card-caption"></span>
+      </a>
+    </li>
+  </template>
+
+  <template id="lyrics-entry">
+    <article class="lyrics-entry">
+      <img class="lyrics-entry-image" width="960" height="600" decoding="async">
+      <div class="lyrics-entry-text">
+        <section class="lyrics-excerpt">
+          <h2>Lyric excerpt</h2>
+          <blockquote></blockquote>
+        </section>
+        <section class="lyrics-note">
+          <p></p>
+        </section>
+      </div>
+    </article>
+  </template>
+
+  <footer class="footer"><span>Copyright © 2026 Klein</span></footer>
+  <script src="../../js/theme.js"></script>
+  <script src="../../js/accessibility.js"></script>
+  <script type="module" src="lyrics.js"></script>
+</body>
+
+</html>

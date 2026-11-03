@@ -95,6 +95,11 @@ const galleryData = [
     tag: 'Take a group photo~',
     description: 'There are four people from PKU, one from CUC, and one from SHTU(:'
   },
+  {
+    src: 'https://rayklein.rth1.xyz/Gallery/26.11.01_arknights.jpg',
+    tag: 'Depressed.........',
+    description: 'Ohno, my salary......'
+  },
 ];
 
 let currentImageIndex = 0;
