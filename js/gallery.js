@@ -26,11 +26,6 @@ const galleryData = [
     description: '千里共婵娟'
   },
   {
-    src: 'https://cdn.rthe.cn/cached-875ef07b80facf44ea0df364927d05f3-avif/rayklein/Gallery/mooncake.JPG',
-    tag: 'Mooncake',
-    description: 'Boyfriend\'s college mooncake taste good.'
-  },
-  {
     src: 'https://cdn.rthe.cn/cached-03327d3f64db9c591a05a71468273f2f-avif/rayklein/Gallery/rouge.JPG',
     tag: 'Le Rouge et Noir',
     description: 'Watch a musical.'

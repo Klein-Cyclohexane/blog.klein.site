@@ -8,7 +8,6 @@ const content = document.querySelector(".lyrics-content");
 const path = document.querySelector(".lyrics-path");
 const heading = document.querySelector(".lyrics-intro h1");
 const description = document.querySelector(".lyrics-description");
-const coversUrl = new URL("./covers/", import.meta.url);
 
 function lyricsHref(genre, track) {
   const query = new URLSearchParams({ genre: genre.id });
@@ -43,7 +42,7 @@ function buildTrackGrid(genre, tracks) {
   tracks.forEach((track) => {
     const card = document.querySelector("#lyrics-card").content.cloneNode(true);
     card.querySelector("a").href = lyricsHref(genre, track);
-    card.querySelector("img").src = new URL(track.image, coversUrl).href;
+    card.querySelector("img").src = track.image;
     card.querySelector(".lyrics-card-title").textContent = track.title;
     const caption = card.querySelector(".lyrics-card-caption");
     if (track.caption) {
@@ -81,7 +80,7 @@ function renderTrack(genre, track) {
 
   const entry = document.querySelector("#lyrics-entry").content.cloneNode(true);
   const image = entry.querySelector("img");
-  image.src = new URL(track.image, coversUrl).href;
+  image.src = track.image;
   image.alt = track.alt;
   if (track.excerpt) {
     entry.querySelector("blockquote").textContent = track.excerpt;
